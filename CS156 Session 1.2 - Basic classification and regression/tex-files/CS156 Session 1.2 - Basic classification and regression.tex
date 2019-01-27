@@ -474,7 +474,10 @@ R\^{}2 score: 0.35
           \PY{c+c1}{\PYZsh{}predict the log base speed}
           \PY{n}{check\PYZus{}moores\PYZus{}pred} \PY{o}{=} \PY{n}{lm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{check\PYZus{}moores\PYZus{}x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
           
-          \PY{c+c1}{\PYZsh{}check the log base speed ratio between each two years}
+          \PY{c+c1}{\PYZsh{}exponentiate the values to get base speed}
+	  \PY{n}{check\PYZus{}moores\PYZus{}pred} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{exp}{(i)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{]}
+
+          \PY{c+c1}{\PYZsh{}check the base speed ratio between each two years}
           \PY{n}{check\PYZus{}moores\PYZus{}ratio} \PY{o}{=} \PY{p}{[}\PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
           \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
           
@@ -485,37 +488,32 @@ R\^{}2 score: 0.35
     \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
     
     \pagebreak
-Ratio of year 2 to year 0: [1.41694778]
+Ratio of year 2 to year 0: [2.47194044]
 
-Ratio of year 4 to year 2: [1.29425769]
+Ratio of year 4 to year 2: [2.47194044]
 
-Ratio of year 6 to year 4: [1.22735634]
+Ratio of year 6 to year 4: [2.47194044]
 
-Ratio of year 8 to year 6: [1.18524069]
+Ratio of year 8 to year 6: [2.47194044]
 
-Ratio of year 10 to year 8: [1.15628951]
+Ratio of year 10 to year 8: [2.47194044]
 
-Ratio of year 12 to year 10: [1.13516469]
+Ratio of year 12 to year 10: [2.47194044]
 
-Ratio of year 14 to year 12: [1.11907056]
+Ratio of year 14 to year 12: [2.47194044]
 
-Ratio of year 16 to year 14: [1.10640129]
+Ratio of year 16 to year 14: [2.47194044]
 
-Ratio of year 18 to year 16: [1.09616881]
+Ratio of year 18 to year 16: [2.47194044]
 
-Ratio of year 20 to year 18: [1.08773175]
+Ratio of year 20 to year 18: [2.47194044]
 
 
     \end{Verbatim}
 
    \subsection*{Conclusion}
 
-From the results above, it looks like the log base speed is not doubling
-every 2 years. In fact, there are increasingly smaller increments in
-speed as the years go by. It should be noted that these results are
-derived from training a linear regression model on a specific subsetted
-dataset (benchName == tomcattv) with 542 data points, so the results may
-not be generalizable to other dense integrated circuits.
+From the results above, it looks like the base speed is increasing by a ratio of roughly 2.5 units every 2 years. This is close enough to a doubling phenomenon, and so Moore's Law is verified. It should be noted that these results are derived from training a linear regression model on a specific subsetted dataset (benchName == tomcattv) with 542 data points, so the results may not be generalizable to other dense integrated circuits.
 \pagebreak
     \section{Digit Recognition}
 
