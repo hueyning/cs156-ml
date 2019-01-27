@@ -1,0 +1,1005 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    \usepackage{amsmath}
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CS156 Session 1.2 - Basic classification and regression}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+
+
+    \section{Moore's law}
+
+Moore's law is the observation that the number of transistors in a dense
+integrated circuit doubles about every two years.\br
+
+Use the scripts from:
+https://github.com/preshing/analyze-spec-benchmarks to download a large
+amount of data relating to CPU specs. The script might take as long as
+an hour, depending on your connection speed.\br
+
+This will save the data in the following format:\br
+
+testID,benchName,base,peak
+
+cpu95-19990104-03254,101.tomcatv,19.4,27.1
+
+cpu95-19990104-03254,102.swim,27.2,34.8
+
+cpu95-19990104-03254,103.su2cor,10.1,9.98
+
+cpu95-19990104-03254,104.hydro2d,8.58,8.61\br
+
+Now do the following:
+
+\begin{itemize}
+\item
+  Extract the date and base speed for a benchmark of your choice
+\item
+  Plot the data in a semi-log plot
+\item
+  Now train a linear model to fit your plot
+\item
+  How well is Moore's law holding up?
+\end{itemize}
+
+    \pagebreak
+    
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{c+c1}{\PYZsh{}import libraries}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{c+c1}{\PYZsh{}import the data}
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spec\PYZhy{}data/benchmarks.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unicode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}226}]:}                  testID    benchName  base  peak
+          0  cpu95-19990104-03254  101.tomcatv  19.4  27.1
+          1  cpu95-19990104-03254     102.swim  27.2  34.8
+          2  cpu95-19990104-03254   103.su2cor  10.1  9.98
+          3  cpu95-19990104-03254  104.hydro2d  8.58  8.61
+          4  cpu95-19990104-03254    107.mgrid  8.94  9.44
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{c+c1}{\PYZsh{}preprocess the data}
+          \PY{c+c1}{\PYZsh{}function to calculate difference in days between two dates}
+          \PY{k}{def} \PY{n+nf}{days\PYZus{}between}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{n}{d2}\PY{p}{)}\PY{p}{:}
+              \PY{n}{d1} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{d2} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{d2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{return} \PY{n+nb}{abs}\PY{p}{(}\PY{p}{(}\PY{n}{d2} \PY{o}{\PYZhy{}} \PY{n}{d1}\PY{p}{)}\PY{o}{.}\PY{n}{days}\PY{p}{)}
+          
+          \PY{n}{benchmark} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{benchName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{}101.tomcattv}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Benchmark chosen: }\PY{l+s+si}{\PYZob{}benchmark\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}extract date from test ID}
+          \PY{n}{new\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{benchName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{benchmark}\PY{p}{)} \PY{o}{\PYZam{}}
+          \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{base}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}compare lengths}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original length of dataset: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(df[(df[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{benchName}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{] == benchmark)])\PYZcb{}. After}
+          \PY{n}{dropping} \PY{n}{invalid} \PY{n}{testIDs}\PY{p}{:} \PY{p}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+          
+          \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{]}
+          \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}convert date to days, where day 0 is the first date logged}
+          \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{testID} \PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{testID} \PY{o}{\PYZhy{}}
+          \PY{n+nb}{min}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{days}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}convert base time to log}
+          \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{base}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{base}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+          \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{logbase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{base}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Benchmark chosen: 101.tomcatv
+original length of dataset: 575. After dropping invalid testIDs: 542
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}230}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{logbase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Days}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log Base Speed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log Base Speed of }\PY{l+s+si}{\PYZob{}benchmark\PYZcb{}}\PY{l+s+s2}{ over time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}230}]:} Text(0.5,1,'Log Base Speed of 101.tomcatv over time')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CS156 Session 1.2 - Basic classification and regression_files/CS156 Session 1.2 - Basic classification and regression_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{r2\PYZus{}score}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          
+          \PY{c+c1}{\PYZsh{}split the dataset into training and testing data}
+          \PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=}
+          \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{new\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{logbase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}reshape datasets}
+          \PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}
+          \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}check the dimensions of the datasets}
+          \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}238}]:} ((433, 1), (109, 1), (433, 1), (109, 1))
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{c+c1}{\PYZsh{} Create linear regression object}
+          \PY{n}{regr} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Train the model using the training sets}
+          \PY{n}{lm} \PY{o}{=} \PY{n}{regr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Make predictions using the testing set}
+          \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{lm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}246}]:} \PY{c+c1}{\PYZsh{} The coefficients}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coefficients:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{regr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} The mean squared error}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean squared error: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Explained variance score: 1 is perfect prediction}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R\PYZca{}2 score: }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot outputs}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Days}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log Base Speed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Regression model of Log Base Speed of }\PY{l+s+si}{\PYZob{}benchmark\PYZcb{}}\PY{l+s+s2}{ over time}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Coefficients: [[0.00123973]]
+Mean squared error: 0.54
+R\^{}2 score: 0.35
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}246}]:} [<matplotlib.lines.Line2D at 0x1a1ece3eb8>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{CS156 Session 1.2 - Basic classification and regression_files/CS156 Session 1.2 - Basic classification and regression_7_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}249}]:} \PY{c+c1}{\PYZsh{}check if number of transistors doubles every 2 years (does the base speed double every 2 years?}
+          
+          \PY{c+c1}{\PYZsh{}set the two years time period (the unit for time is in days)}
+          \PY{n}{two\PYZus{}yrs} \PY{o}{=} \PY{l+m+mi}{365}\PY{o}{*}\PY{l+m+mi}{2}
+          
+          \PY{c+c1}{\PYZsh{}check 10 units of two years}
+          \PY{n}{check\PYZus{}moores\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{two\PYZus{}yrs}\PY{o}{*}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}predict the log base speed}
+          \PY{n}{check\PYZus{}moores\PYZus{}pred} \PY{o}{=} \PY{n}{lm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{check\PYZus{}moores\PYZus{}x}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}check the log base speed ratio between each two years}
+          \PY{n}{check\PYZus{}moores\PYZus{}ratio} \PY{o}{=} \PY{p}{[}\PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
+          \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{check\PYZus{}moores\PYZus{}pred}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{check\PYZus{}moores\PYZus{}ratio}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ratio of year }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{(i+1)*2\PYZcb{} to year }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i*2\PYZcb{}: }\PY{l+s+si}{\PYZob{}check\PYZus{}moores\PYZus{}ratio[i]\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+    
+    \pagebreak
+Ratio of year 2 to year 0: [1.41694778]
+
+Ratio of year 4 to year 2: [1.29425769]
+
+Ratio of year 6 to year 4: [1.22735634]
+
+Ratio of year 8 to year 6: [1.18524069]
+
+Ratio of year 10 to year 8: [1.15628951]
+
+Ratio of year 12 to year 10: [1.13516469]
+
+Ratio of year 14 to year 12: [1.11907056]
+
+Ratio of year 16 to year 14: [1.10640129]
+
+Ratio of year 18 to year 16: [1.09616881]
+
+Ratio of year 20 to year 18: [1.08773175]
+
+
+    \end{Verbatim}
+
+   \subsection*{Conclusion}
+
+From the results above, it looks like the log base speed is not doubling
+every 2 years. In fact, there are increasingly smaller increments in
+speed as the years go by. It should be noted that these results are
+derived from training a linear regression model on a specific subsetted
+dataset (benchName == tomcattv) with 542 data points, so the results may
+not be generalizable to other dense integrated circuits.
+\pagebreak
+    \section{Digit Recognition}
+
+No machine learning course would be complete without using the MNIST
+dataset. This dataset was a hugely influential dataset of handwritten
+digits (0-9).\br
+
+Using load\_digits from sklearn, a copy of the test set of the UCI ML
+hand-written digits datasets can be loaded to train a model to recognize
+handwritten digits.\footnote{http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load\_digits.html\#sklearn.datasets.load\_digits}
+
+\begin{itemize}
+\item
+  Plot some of the examples.
+\item
+  Choose two digit classes (e.g 7s and 3s) , and train a k-nearest
+  neighbor classifier.
+\item
+  Report your error rates on a held out part of the data.
+\item
+  (Optional) Test your model on the full MNIST dataset (available from
+  http://yann.lecun.com/exdb/mnist/)
+\end{itemize}
+
+    \subsection{Training and Testing a KNN Model using UCI ML Digit Dataset}
+
+First, we separate the UCI ML dataset into a training and testing set.
+There are about 1800 data points in this dataset, and 64 features (8 x 8
+pixel size). A KNN classifier is trained on the training set, and the
+model scores are reported for the testing set. We train the model on
+only two digits, in this case: 2 and 7.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{load\PYZus{}digits}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,}\PY{n}{accuracy\PYZus{}score}
+          
+          \PY{n}{digits} \PY{o}{=} \PY{n}{load\PYZus{}digits}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Size of UCI ML digit dataset: }\PY{l+s+si}{\PYZob{}digits.data.shape\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{images\PYZus{}and\PYZus{}labels} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{digits}\PY{o}{.}\PY{n}{images}\PY{p}{,} \PY{n}{digits}\PY{o}{.}\PY{n}{target}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{label}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{images\PYZus{}and\PYZus{}labels}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{index} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{gray\PYZus{}r}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training: }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{label}\PY{p}{)}
+          
+          \PY{n}{data}\PY{p}{,} \PY{n}{target} \PY{o}{=} \PY{n}{digits}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{digits}\PY{o}{.}\PY{n}{target}
+          
+          \PY{c+c1}{\PYZsh{}filter out only 2 and 7 to be used for training}
+          \PY{n}{two\PYZus{}filter} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{target} \PY{o}{==} \PY{l+m+mi}{2} \PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{target} \PY{o}{==} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n}{data}\PY{p}{,} \PY{n}{target} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{two\PYZus{}filter}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{n}{two\PYZus{}filter}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Size of UCI ML digit dataset: (1797, 64)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.6\linewidth}{0.6\paperheight}}{CS156 Session 1.2 - Basic classification and regression_files/CS156 Session 1.2 - Basic classification and regression_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{c+c1}{\PYZsh{}split the dataset into training and testing data}
+          \PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{target}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}check the dimensions of the datasets}
+          \PY{n}{x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}197}]:} ((284, 64), (72, 64), (284,), (72,))
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{c+c1}{\PYZsh{}referenced from https://towardsdatascience.com/building\PYZhy{}improving\PYZhy{}a\PYZhy{}k\PYZhy{}nearest\PYZhy{}}
+          \PY{n}{neighbors}\PY{o}{\PYZhy{}}\PY{n}{algorithm}\PY{o}{\PYZhy{}}\PY{o+ow}{in}\PY{o}{\PYZhy{}}\PY{n}{python}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{n}{b6b5320d2f8}
+          
+          \PY{k}{def} \PY{n+nf}{skl\PYZus{}knn}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}target}\PY{p}{,} \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}target}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    k: number of neighbors to use in classication}
+          \PY{l+s+sd}{    test\PYZus{}data: the data/targets used to test the classifier}
+          \PY{l+s+sd}{    train\PYZus{}data: the data/targets used to train the classifier}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{c+c1}{\PYZsh{}create KNN classifier object}
+              \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}train the model}
+              \PY{n}{model} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{train\PYZus{}target}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}make predictions}
+              \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{KNN Classifier with K\PYZhy{}value: }\PY{l+s+si}{\PYZob{}k\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy score: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{test\PYZus{}target}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{test\PYZus{}target}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          \PY{n}{skl\PYZus{}knn}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{skl\PYZus{}knn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{skl\PYZus{}knn}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+\pagebreak
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+KNN Classifier with K-value: 1
+Accuracy score:  1.0
+             precision    recall  f1-score   support
+
+          2       1.00      1.00      1.00        33
+          7       1.00      1.00      1.00        39
+
+avg / total       1.00      1.00      1.00        72
+
+
+KNN Classifier with K-value: 5
+Accuracy score:  1.0
+             precision    recall  f1-score   support
+
+          2       1.00      1.00      1.00        33
+          7       1.00      1.00      1.00        39
+
+avg / total       1.00      1.00      1.00        72
+
+
+KNN Classifier with K-value: 15
+Accuracy score:  1.0
+             precision    recall  f1-score   support
+
+          2       1.00      1.00      1.00        33
+          7       1.00      1.00      1.00        39
+
+avg / total       1.00      1.00      1.00        72
+
+
+
+    \end{Verbatim}
+
+    \subsection*{Summary}
+
+From the classification report above, we see that after training a knn
+classifier using k-values of 1, 5, and 15 on the UCI ML training
+dataset, the classification of the digits 2 and 7 receive an accuracy,
+precision, and recall score 1.00 on the testing dataset. This means that
+the error rate is effectively 0.00 for the test set.
+\pagebreak
+    \subsection{Training and Testing a KNN Model using MNIST Dataset}
+
+The KNN model trained and tested in Part 1 using the UCI ML dataset is
+now tested on the full MNIST dataset of 70,000 data points with 784
+features (28 x 28 pixel size).\footnote{http://yann.lecun.com/exdb/mnist/} Once again, we only test for the
+classification of digits 2 and 7 (since the model was only trained on
+digits 2 and 7).
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}181}]:} \PY{c+c1}{\PYZsh{}import MNIST dataset}
+          \PY{k+kn}{from} \PY{n+nn}{six}\PY{n+nn}{.}\PY{n+nn}{moves} \PY{k}{import} \PY{n}{urllib}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{fetch\PYZus{}mldata}
+          
+          \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{loadmat}
+          \PY{n}{mnist\PYZus{}alternative\PYZus{}url} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://github.com/amplab/datascience\PYZhy{}}
+          \PY{n}{sp14}\PY{o}{/}\PY{n}{raw}\PY{o}{/}\PY{n}{master}\PY{o}{/}\PY{n}{lab7}\PY{o}{/}\PY{n}{mldata}\PY{o}{/}\PY{n}{mnist}\PY{o}{\PYZhy{}}\PY{n}{original}\PY{o}{.}\PY{n}{mat}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n}{mnist\PYZus{}path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./mnist\PYZhy{}original.mat}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n}{response} \PY{o}{=} \PY{n}{urllib}\PY{o}{.}\PY{n}{request}\PY{o}{.}\PY{n}{urlopen}\PY{p}{(}\PY{n}{mnist\PYZus{}alternative\PYZus{}url}\PY{p}{)}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{mnist\PYZus{}path}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{content} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+              \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{content}\PY{p}{)}
+          \PY{n}{mnist\PYZus{}raw} \PY{o}{=} \PY{n}{loadmat}\PY{p}{(}\PY{n}{mnist\PYZus{}path}\PY{p}{)}
+          \PY{n}{mnist} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{mnist\PYZus{}raw}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{p}{,}
+              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{mnist\PYZus{}raw}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{COL\PYZus{}NAMES}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{label}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DESCR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mldata.org dataset: mnist\PYZhy{}original}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+          \PY{p}{\PYZcb{}}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Success!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Success!
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Size of MNIST digit dataset: }\PY{l+s+si}{\PYZob{}mnist[\PYZsq{}data\PYZsq{}].shape\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}take a peak at the MNIST dataset structure}
+          \PY{n}{mnist}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Size of MNIST digit dataset: (70000, 784)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}209}]:} \{'data': array([[0, 0, 0, {\ldots}, 0, 0, 0],
+                  [0, 0, 0, {\ldots}, 0, 0, 0],
+                  [0, 0, 0, {\ldots}, 0, 0, 0],
+                  {\ldots},
+                  [0, 0, 0, {\ldots}, 0, 0, 0],
+                  [0, 0, 0, {\ldots}, 0, 0, 0],
+                  [0, 0, 0, {\ldots}, 0, 0, 0]], dtype=uint8),
+           'target': array([0., 0., 0., {\ldots}, 9., 9., 9.]),
+           'COL\_NAMES': ['label', 'data'],
+           'DESCR': 'mldata.org dataset: mnist-original'\}
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{n}{mnist\PYZus{}data}\PY{p}{,} \PY{n}{mnist\PYZus{}target} \PY{o}{=} \PY{n}{mnist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{mnist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}filter out only 2 and 7 to be used for training}
+          \PY{n}{two\PYZus{}filter} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{(}\PY{n}{mnist\PYZus{}target} \PY{o}{==} \PY{l+m+mi}{2} \PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{mnist\PYZus{}target} \PY{o}{==} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mnist\PYZus{}data}\PY{p}{,} \PY{n}{mnist\PYZus{}target} \PY{o}{=} \PY{n}{mnist\PYZus{}data}\PY{p}{[}\PY{n}{two\PYZus{}filter}\PY{p}{]}\PY{p}{,} \PY{n}{mnist\PYZus{}target}\PY{p}{[}\PY{n}{two\PYZus{}filter}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}split the dataset into training and testing data}
+          \PY{n}{mnist\PYZus{}x\PYZus{}train}\PY{p}{,}\PY{n}{mnist\PYZus{}x\PYZus{}test}\PY{p}{,}\PY{n}{mnist\PYZus{}y\PYZus{}train}\PY{p}{,}\PY{n}{mnist\PYZus{}y\PYZus{}test} \PY{o}{=}
+          \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{mnist\PYZus{}data}\PY{p}{,}\PY{n}{mnist\PYZus{}target}\PY{p}{,}\PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}check the dimensions of the datasets}
+          \PY{n}{mnist\PYZus{}x\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{mnist\PYZus{}x\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{mnist\PYZus{}y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{mnist\PYZus{}y\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}217}]:} ((11426, 784), (2857, 784), (11426,), (2857,))
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{n}{skl\PYZus{}knn}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{mnist\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{mnist\PYZus{}y\PYZus{}test}\PY{p}{,} \PY{n}{mnist\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{mnist\PYZus{}y\PYZus{}train}\PY{p}{)}
+          \PY{n}{skl\PYZus{}knn}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{mnist\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{mnist\PYZus{}y\PYZus{}test}\PY{p}{,} \PY{n}{mnist\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{mnist\PYZus{}y\PYZus{}train}\PY{p}{)}
+          \PY{n}{skl\PYZus{}knn}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{mnist\PYZus{}x\PYZus{}test}\PY{p}{,} \PY{n}{mnist\PYZus{}y\PYZus{}test}\PY{p}{,} \PY{n}{mnist\PYZus{}x\PYZus{}train}\PY{p}{,} \PY{n}{mnist\PYZus{}y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+KNN Classifier with K-value: 1
+Accuracy score:  0.9926496324816241
+             precision    recall  f1-score   support
+
+        2.0       1.00      0.99      0.99      1376
+        7.0       0.99      1.00      0.99      1481
+
+avg / total       0.99      0.99      0.99      2857
+
+
+KNN Classifier with K-value: 5
+Accuracy score:  0.9908995449772489
+             precision    recall  f1-score   support
+
+        2.0       1.00      0.98      0.99      1376
+        7.0       0.99      1.00      0.99      1481
+
+avg / total       0.99      0.99      0.99      2857
+
+
+KNN Classifier with K-value: 15
+Accuracy score:  0.9884494224711236
+             precision    recall  f1-score   support
+
+        2.0       1.00      0.98      0.99      1376
+        7.0       0.98      1.00      0.99      1481
+
+avg / total       0.99      0.99      0.99      2857
+
+
+
+    \end{Verbatim}
+
+    \subsection*{Summary}
+
+From the classification report above, we see that for the MNIST dataset,
+using a k-value of 1 in the knn algorithm results in the highest
+accuracy score (0.993), followed by k-value 5 (0.991) and k-value 15
+(0.988). By increasing the k-value, we are including more neighbors in
+the majority vote process of deciding on the final output. In this
+particular problem of classifying the digits of 2 and 7, more neighbors
+means more noise, which results in more incorrect predictions.\br
+
+In terms of precision and recall scores, 2 is classified with higher
+precision vs recall, while 7 is classified with higher recall vs
+precision. This means that for 2, not all positive samples are found,
+but the ones that are found are all correctly classified. For 7, all the
+positive samples are found, but not all are correctly classified.
+
+\pagebreak
+    \subsection*{UCI ML Dataset Model vs MNIST Dataset Model}
+
+From the results, it appears that the KNN model trained and tested on
+the UCI ML dataset returns a higher accuracy score and so lower error
+rate vs the KNN model trained and tested on the MNIST dataset.\br
+
+While these are two entirely different datasets and so should not be
+compared to each other, they share the similarity of being handwritten
+digit datasets, and being preprocessed using NIST preprocessing
+routines. The MNIST dataset has a larger image size (28 x 28 pixels) vs
+the UCI ML dataset (8 x 8 pixels), and many more data points as well
+(70,000 vs 1797).\br
+
+While there is more training data available for the MNIST dataset, there
+is also more variation and room for error (both in training the model
+and receiving the test score). The different preprocessing techniques
+might also have led to a "cleaner" dataset overall for UCI ML, which has
+the short-term benefit of returning higher scores for the UCI ML test
+set, but could lead to the long-term detriment of the model having high
+bias and underfitting on future data.\br
+
+In conclusion, I would prefer the MNIST-trained model over the
+UCIML-trained model since there were much more data points available for
+training and testing for the MNIST model, and the accuracy score is
+still relatively high, with an error rate that we would realistically
+expect from a human as well (some 2s and 7s could look really similar
+depending on the handwriting). In order to truly compare the
+capabilities of the two models, they would have to be tested on the same
+new, unseen dataset of handwritten digits.\br
+
+However, it should still be noted that the UCIML-model needs an input of
+8 x 8 pixels (64 features) while the MNIST-model needs an input of 28 x
+28 pixels (784 features); different digit images might have different
+levels of clarity and contrast based on their original size vs after
+compression to the appropriate input size.\br
+
+
+
+    \subsection*{Explanation of Classification Report\footnote{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision\_recall\_fscore\_support.html}}
+
+\begin{itemize}
+\item
+Precision - The precision is the ratio tp / (tp + fp) where tp is the
+number of true positives and fp the number of false positives. The
+precision is intuitively the ability of the classifier not to label as
+positive a sample that is negative.
+
+\item
+Recall - The recall is the ratio tp / (tp + fn) where tp is the number
+of true positives and fn the number of false negatives. The recall is
+intuitively the ability of the classifier to find all the positive
+samples.
+
+\item
+f1-score - The F-beta score can be interpreted as a weighted harmonic
+mean of the precision and recall, where an F-beta score reaches its best
+value at 1 and worst score at 0. The F-beta score weights recall more than precision by a factor of
+  beta. beta == 1.0 means recall and precision are equally important.
+
+\item
+support - The support is the number of occurrences of each class in
+y\_true.
+
+\end{itemize}
+
+
+    \section{Textbook Questions}
+
+\subsection*{Exercise 1.14.}
+
+A redistribution lottery involves picking the correct four numbers from
+1 to 9 (without replacement, so 3,4,4,1 for example is not possible).
+The order of the picked numbers is irrelevant. Every week a million
+people play this game, each paying £1 to enter, with the numbers 3,5,7,9
+being the most popular (1 in every 100 people chooses these numbers).
+Given that the million pounds prize money is split equally between
+winners, and that any four (different) numbers come up at random, what
+is the expected amount of money each of the players choosing 3,5,7,9
+will win each week? The least popular set of numbers is 1,2,3,4 with
+only 1 in 10,000 people choosing this. How much do they profit each
+week, on average? Do you think there is any `skill' involved in playing
+this lottery?\br
+
+    \textbf{Solution}
+    
+    \begin{gather*}
+    P(\text{win | choose any 4 numbers without replacement}) =
+\frac{1}{9C4} = \frac{1}{126}\\
+U(\text{win|number set}) = U(\text{reward money}) \div (\text{number of people who chose number set})\\
+EU(\text{win|}3579) = P(\text{win}|3579) \times U(\text{win}|3579) = \frac{1}{126} \times 1000000 \div \frac{1000000}{100} = 0.79\\
+EU(\text{win|}1234) = P(\text{win}|1234) \times U(\text{win}|1234) = \frac{1}{126} \times 1000000 \div \frac{1000000}{10000} = 79.37\\
+    \end{gather*}
+
+
+
+The expected amount of money each of the players choosing 3,5,7,9 will
+win each week is only £0.79, while the expected amount of money each of
+the players choosing 1,2,3,4 will win each week is £79.37.\br
+
+I don't think there is any 'skill' involved in playing this lottery, but
+there is an element of strategy. Since each 4-number set has equal
+probability of being chosen each week, one should strategize to choose
+the least favored set since it has to be shared among the least amount
+of people, and so has the highest expected utility. The tricky part is
+figuring out which 4-number set will be the least popular.\br
+
+If one could figure out the probability of each 4-number set being
+chosen by the general population, then one could strategically aim to
+choose the 4-number set with the lowest probability of being chosen.
+However, I still consider this a strategy and not a skill since
+theoretically speaking, anyone with access to these probabilities could
+implement the strategy as well without practice. The only skill involved
+might be data-gathering or calculating probabilities.
+\pagebreak
+    \subsection*{Exercise 13.5.}
+
+WowCo.com is a new startup prediction company. After years of failures,
+they eventually find a neural network with a trillion hidden units that
+achieves zero test error on every learning problem posted on the
+internet up to last week. Each learning problem included a train and
+test set. Proud of their achievement, they market their product
+aggressively with the claim that it `predicts perfectly on all known
+problems'. Discuss whether or not these claims would justify buying this
+product.\br
+
+\textbf{Solution}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  I would need to know their methodology. Although each learning problem
+  included a train and test set, did they only train on the training
+  set, or did they train on the test set as well until 0 error was
+  achieved?
+\item
+  I would need to know the complexity of the learning problems.
+  Achieving a 0 test error on high-dimensional, complex problems with a
+  varied set of features would be much more difficult vs achieving a 0
+  test error on low-dimensional, simple problems. The harder the
+  predictive question being answered by the problem, the more impressive
+  the startup's algorithm is.
+\item
+  I think a difficult aspect of prediction problems is feature
+  engineering - deciding on the features needed to inform a particular
+  prediction would mean collecting different types of data. While one
+  could argue that collecting more data will always lead to an improved
+  prediction model, there are practical budgets and limitations to
+  consider in the data collection process, alongside a potential risk of
+  overfitting. If the learning problems consist of ideal datasets with
+  pre-filtered "relevant" features, then they do not accurately
+  represent the inherent noise that accompanies real world data.
+\item
+  The zero error rate might indicate that the training and testing
+  datasets in the learning problems were idealistically "clean". Data in
+  the real world can often be irregular, inconsistent, or vague, and so
+  a minimum amount of error is expected to represent the inconsistent
+  behavior of natural phenomena around us as well.
+\item
+  I would also argue that being able to "predict perfectly on all known
+  problems" is not a sufficiently strong reason to buy their product.
+  Oftentimes, a company or business can identify their challenges and
+  goals, but do not know what they need to predict for or predict on in
+  order to resolve these challenges and/or achieve these goals. If the
+  company/businessowner already knows the answers that they want
+  predicted, and have all the data ready for training and prediction,
+  then perhaps purchasing the product would be justified. Otherwise, I
+  would imagine that the hard part is figuring out what the predictive
+  problem is first, and what data needs to be collected to solve it.
+\end{enumerate}
+\pagebreak
+    \subsection*{Appendix}
+
+\textbf{HCs}\br
+
+\textbf{\#regression:} I trained a simple linear regression model to predict the
+base speed of a given CPU benchmark based on the number of days passed
+since day 0, where day 0 is the first date recorded for the given CPU
+benchmark. I then used this predictive linear model to verify Moore's
+Law (it doesn't hold up). I also point out the limitations of my
+regression model, the key one being that it was only trained on a
+specific benchmark and on a limited amount of data, and so may not be
+representative of the general case.\br
+
+\textbf{\#expectedutility:} In Exercise 1.14, I calculated the expected financial
+utility of choosing the different sets of numbers, and took into account
+the probability of winning, the reward money, and the number of people
+that the money has to be shared with in constructing my expected utility
+function. While expected utility in general is a subjective concept and
+so would involve value assigned based on individual preference, we can
+make a simplification in this lottery case that the expected utility of
+reward money would be the same for most individuals who bought a lottery
+ticket, i.e. the level of risk involved is roughly the same among the
+participants.\br
+
+\textbf{Code Source}
+
+\url{https://github.com/hueyning/cs156-ml/blob/master/CS156\%20Session\%201.2\%20-\%20Basic\%20classification\%20and\%20regression/CS156\%20Session\%201.2\%20-\%20Basic\%20classification\%20and\%20regression.ipynb}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
