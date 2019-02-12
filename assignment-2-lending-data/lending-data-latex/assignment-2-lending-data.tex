@@ -1,0 +1,2072 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+    \usepackage{hyperref}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment 2: Lending Club Data}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+   
+
+The Lending Club is a platform which allows the crowdfunding of various
+loans. Various investors are able to browse the profiles of people
+applying for loans and decide whether or not to help fund them. The Lending club has made an anonymized set of data available for anyone
+to study at: \url{https://www.lendingclub.com/info/download-data.action}\br
+
+In this assignment, I will build a model that predicts the largest loan
+amount that will be successfully funded for given individual. This model
+can then be used to advise applicants on how much they could apply for.
+
+   \section{Data Cleaning and Preprocessing}
+
+   \subsection{ Importing Libraries and Importing Data}
+
+The data imported is the 2015 Approved Loan and 2015 Declined Loan csv
+data from the lending club website.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{c+c1}{\PYZsh{}import loan data}
+          \PY{n}{loan} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LoanStats3d.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}column names}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{loan}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}peak at the df}
+          \PY{n}{loan}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+/anaconda3/lib/python3.6/site-packages/IPython/core/interactiveshell.py:2785:
+DtypeWarning: Columns (0,19,55) have mixed types. Specify dtype option on import or
+set low\_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+['id', 'member\_id', 'loan\_amnt', 'funded\_amnt', 'funded\_amnt\_inv', 'term', 'int\_rate',
+'installment', 'grade', 'sub\_grade', 'emp\_title', 'emp\_length', 'home\_ownership',
+'annual\_inc', 'verification\_status', 'issue\_d', 'loan\_status', 'pymnt\_plan', 'url',
+'desc', 'purpose', 'title', 'zip\_code', 'addr\_state', 'dti', 'delinq\_2yrs',
+'earliest\_cr\_line', 'inq\_last\_6mths', 'mths\_since\_last\_delinq',
+'mths\_since\_last\_record', 'open\_acc', 'pub\_rec', 'revol\_bal', 'revol\_util',
+'total\_acc', 'initial\_list\_status', 'out\_prncp', 'out\_prncp\_inv', 'total\_pymnt',
+'total\_pymnt\_inv', 'total\_rec\_prncp', 'total\_rec\_int', 'total\_rec\_late\_fee',
+'recoveries', 'collection\_recovery\_fee', 'last\_pymnt\_d', 'last\_pymnt\_amnt',
+'next\_pymnt\_d', 'last\_credit\_pull\_d', 'collections\_12\_mths\_ex\_med',
+'mths\_since\_last\_major\_derog', 'policy\_code', 'application\_type', 'annual\_inc\_joint',
+'dti\_joint', 'verification\_status\_joint', 'acc\_now\_delinq', 'tot\_coll\_amt',
+'tot\_cur\_bal', 'open\_acc\_6m', 'open\_act\_il', 'open\_il\_12m', 'open\_il\_24m',
+'mths\_since\_rcnt\_il', 'total\_bal\_il', 'il\_util', 'open\_rv\_12m', 'open\_rv\_24m',
+'max\_bal\_bc', 'all\_util', 'total\_rev\_hi\_lim', 'inq\_fi', 'total\_cu\_tl', 'inq\_last\_12m',
+'acc\_open\_past\_24mths', 'avg\_cur\_bal', 'bc\_open\_to\_buy', 'bc\_util',
+'chargeoff\_within\_12\_mths', 'delinq\_amnt', 'mo\_sin\_old\_il\_acct',
+'mo\_sin\_old\_rev\_tl\_op', 'mo\_sin\_rcnt\_rev\_tl\_op', 'mo\_sin\_rcnt\_tl', 'mort\_acc',
+'mths\_since\_recent\_bc', 'mths\_since\_recent\_bc\_dlq', 'mths\_since\_recent\_inq',
+'mths\_since\_recent\_revol\_delinq', 'num\_accts\_ever\_120\_pd', 'num\_actv\_bc\_tl',
+'num\_actv\_rev\_tl', 'num\_bc\_sats', 'num\_bc\_tl', 'num\_il\_tl', 'num\_op\_rev\_tl',
+'num\_rev\_accts', 'num\_rev\_tl\_bal\_gt\_0', 'num\_sats', 'num\_tl\_120dpd\_2m',
+'num\_tl\_30dpd', 'num\_tl\_90g\_dpd\_24m', 'num\_tl\_op\_past\_12m', 'pct\_tl\_nvr\_dlq',
+'percent\_bc\_gt\_75', 'pub\_rec\_bankruptcies', 'tax\_liens', 'tot\_hi\_cred\_lim',
+'total\_bal\_ex\_mort', 'total\_bc\_limit', 'total\_il\_high\_credit\_limit',
+'revol\_bal\_joint', 'sec\_app\_earliest\_cr\_line', 'sec\_app\_inq\_last\_6mths',
+'sec\_app\_mort\_acc', 'sec\_app\_open\_acc', 'sec\_app\_revol\_util', 'sec\_app\_open\_act\_il',
+'sec\_app\_num\_rev\_accts', 'sec\_app\_chargeoff\_within\_12\_mths',
+'sec\_app\_collections\_12\_mths\_ex\_med', 'sec\_app\_mths\_since\_last\_major\_derog',
+'hardship\_flag', 'hardship\_type', 'hardship\_reason', 'hardship\_status',
+'deferral\_term', 'hardship\_amount', 'hardship\_start\_date', 'hardship\_end\_date',
+'payment\_plan\_start\_date', 'hardship\_length', 'hardship\_dpd', 'hardship\_loan\_status',
+'orig\_projected\_additional\_accrued\_interest', 'hardship\_payoff\_balance\_amount',
+'hardship\_last\_payment\_amount', 'disbursement\_method', 'debt\_settlement\_flag',
+'debt\_settlement\_flag\_date', 'settlement\_status', 'settlement\_date',
+'settlement\_amount', 'settlement\_percentage', 'settlement\_term']
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}202}]:}     id  member\_id  loan\_amnt  funded\_amnt  funded\_amnt\_inv        term  \textbackslash{}
+          0  NaN        NaN    24700.0      24700.0          24700.0   36 months   
+          1  NaN        NaN    17925.0      17925.0          17925.0   60 months   
+          2  NaN        NaN     9000.0       9000.0           9000.0   36 months   
+          3  NaN        NaN    11550.0      11550.0          11550.0   60 months   
+          4  NaN        NaN    12000.0      12000.0          12000.0   60 months   
+          
+            int\_rate  installment grade sub\_grade       {\ldots}        \textbackslash{}
+          0   11.99\%       820.28     C        C1       {\ldots}         
+          1   17.27\%       448.09     D        D3       {\ldots}         
+          2    8.49\%       284.07     B        B1       {\ldots}         
+          3   16.59\%       284.51     D        D2       {\ldots}         
+          4    9.80\%       253.79     B        B3       {\ldots}         
+          
+            hardship\_payoff\_balance\_amount hardship\_last\_payment\_amount  \textbackslash{}
+          0                            NaN                          NaN   
+          1                            NaN                          NaN   
+          2                            NaN                          NaN   
+          3                            NaN                          NaN   
+          4                            NaN                          NaN   
+          
+            disbursement\_method  debt\_settlement\_flag debt\_settlement\_flag\_date  \textbackslash{}
+          0                Cash                     N                       NaN   
+          1                Cash                     N                       NaN   
+          2                Cash                     N                       NaN   
+          3                Cash                     N                       NaN   
+          4                Cash                     N                       NaN   
+          
+            settlement\_status settlement\_date settlement\_amount  settlement\_percentage  \textbackslash{}
+          0               NaN             NaN               NaN                    NaN   
+          1               NaN             NaN               NaN                    NaN   
+          2               NaN             NaN               NaN                    NaN   
+          3               NaN             NaN               NaN                    NaN   
+          4               NaN             NaN               NaN                    NaN   
+          
+            settlement\_term  
+          0             NaN  
+          1             NaN  
+          2             NaN  
+          3             NaN  
+          4             NaN  
+          
+          [5 rows x 145 columns]
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{c+c1}{\PYZsh{}import reject data}
+          \PY{n}{reject} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RejectStatsD.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{skiprows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}column names}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{reject}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}peak at the df}
+          \PY{n}{reject}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+['Amount Requested', 'Application Date', 'Loan Title', 'Risk\_Score', 'Debt-To-Income
+Ratio', 'Zip Code', 'State', 'Employment Length', 'Policy Code']
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}203}]:}    Amount Requested Application Date          Loan Title  Risk\_Score  \textbackslash{}
+          0           30000.0       2015-01-01  debt\_consolidation       681.0   
+          1            5000.0       2015-01-01  debt\_consolidation       648.0   
+          2           10000.0       2015-01-01  Debt consolidation       721.0   
+          3           10000.0       2015-01-01      major\_purchase       659.0   
+          4            5000.0       2015-01-01  debt\_consolidation       501.0   
+          
+            Debt-To-Income Ratio Zip Code State Employment Length  Policy Code  
+          0               35.65\%    958xx    CA          < 1 year            0  
+          1               10.62\%    945xx    CA          < 1 year            0  
+          2               10.02\%    750xx    TX           7 years            0  
+          3               19.05\%    853xx    AZ          < 1 year            0  
+          4               10.73\%    475xx    IN          < 1 year            0  
+\end{Verbatim}
+
+    \subsection{Choosing which columns to keep}
+
+I can only keep columns that exist in both the approved and rejected
+loan datasets. The table below shows the column names that exist in both
+the loan data and reject data that share the same definition (as defined
+by the data dictionary on the lending data website).
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+Loan Data\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
+Reject Data\strut
+\end{minipage} & \begin{minipage}[b]{0.6\columnwidth}\raggedright\strut
+Definition\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+loan\_amnt\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Amount Requested\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+The total amount requested by the borrower\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+title\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Loan Title\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+The loan title provided by the borrower\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+dti\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Debt-To-Income Ratio\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+A ratio calculated using the borrower's total monthly debt payments on
+the total debt obligations, excluding mortgage and the requested LC
+loan, divided by the borrower's self-reported monthly income.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+zip\_code\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Zip Code\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+The first 3 numbers of the zip code provided by the borrower in the loan
+application.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+addr\_state\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+State\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+The state provided by the borrower in the loan application\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+emp\_length\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Employment Length\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+Employment length in years. Possible values are between 0 and 10 where 0
+means less than one year and 10 means ten or more years.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+policy\_code\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Policy Code\strut
+\end{minipage} & \begin{minipage}[t]{0.6\columnwidth}\raggedright\strut
+publicly available policy\_code=1; new products not publicly available
+policy\_code=2\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{c+c1}{\PYZsh{}Drop all columns that do not exist in both dataframes.}
+          \PY{n}{loan} \PY{o}{=}
+          \PY{n}{loan}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}amnt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dti}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zip\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{addr\PYZus{}state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emp\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{policy\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{loan}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{loan}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{loan}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+(421097, 8)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}204}]:}    loan\_amnt                    title    dti zip\_code addr\_state emp\_length  \textbackslash{}
+          0    24700.0                 Business  16.06    577xx         SD  10+ years   
+          1    17925.0       Debt consolidation  27.78    432xx         OH  10+ years   
+          2     9000.0       Debt consolidation   8.43    346xx         FL    8 years   
+          3    11550.0  Credit card refinancing  21.07    436xx         OH    5 years   
+          4    12000.0       Debt consolidation  23.84    660xx         KS  10+ years   
+          
+             policy\_code  Status  
+          0          1.0       1  
+          1          1.0       1  
+          2          1.0       1  
+          3          1.0       1  
+          4          1.0       1  
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{n}{reject} \PY{o}{=} \PY{n}{reject}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount Requested}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt\PYZhy{}To\PYZhy{}Income Ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Zip}
+          \PY{n}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{State}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Employment} \PY{n}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Policy} \PY{n}{Code}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]]}
+          \PY{n}{reject}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{reject}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{reject}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+(2859379, 8)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}205}]:}    Amount Requested          Loan Title Debt-To-Income Ratio Zip Code State  \textbackslash{}
+          0           30000.0  debt\_consolidation               35.65\%    958xx    CA   
+          1            5000.0  debt\_consolidation               10.62\%    945xx    CA   
+          2           10000.0  Debt consolidation               10.02\%    750xx    TX   
+          3           10000.0      major\_purchase               19.05\%    853xx    AZ   
+          4            5000.0  debt\_consolidation               10.73\%    475xx    IN   
+          
+            Employment Length  Policy Code  Status  
+          0          < 1 year            0       0  
+          1          < 1 year            0       0  
+          2           7 years            0       0  
+          3          < 1 year            0       0  
+          4          < 1 year            0       0  
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{c+c1}{\PYZsh{}rename columns in loan data so that it is the same as reject data}
+          \PY{n}{loan}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{reject}\PY{p}{)}
+          \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{loan}\PY{p}{,}\PY{n}{reject}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+(3280476, 8)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}206}]:}    Amount Requested               Loan Title Debt-To-Income Ratio Zip Code  \textbackslash{}
+          0           24700.0                 Business                16.06    577xx   
+          1           17925.0       Debt consolidation                27.78    432xx   
+          2            9000.0       Debt consolidation                 8.43    346xx   
+          3           11550.0  Credit card refinancing                21.07    436xx   
+          4           12000.0       Debt consolidation                23.84    660xx   
+          
+            State Employment Length  Policy Code  Status  
+          0    SD         10+ years          1.0       1  
+          1    OH         10+ years          1.0       1  
+          2    FL           8 years          1.0       1  
+          3    OH           5 years          1.0       1  
+          4    KS         10+ years          1.0       1  
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{n}{data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{null\PYZus{}counts}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 3280476 entries, 0 to 2859378
+Data columns (total 8 columns):
+Amount Requested        3280474 non-null float64
+Loan Title              3280342 non-null object
+Debt-To-Income Ratio    3280472 non-null object
+Zip Code                3280474 non-null object
+State                   3280474 non-null object
+Employment Length       3182914 non-null object
+Policy Code             3280474 non-null float64
+Status                  3280476 non-null int64
+dtypes: float64(2), int64(1), object(5)
+memory usage: 225.3+ MB
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{c+c1}{\PYZsh{}drop NaN values from data}
+          \PY{n}{data}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{null\PYZus{}counts}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 3182789 entries, 0 to 2859378
+Data columns (total 8 columns):
+Amount Requested        3182789 non-null float64
+Loan Title              3182789 non-null object
+Debt-To-Income Ratio    3182789 non-null object
+Zip Code                3182789 non-null object
+State                   3182789 non-null object
+Employment Length       3182789 non-null object
+Policy Code             3182789 non-null float64
+Status                  3182789 non-null int64
+dtypes: float64(2), int64(1), object(5)
+memory usage: 218.5+ MB
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{c+c1}{\PYZsh{}convert debt\PYZhy{}to\PYZhy{}income ratio and employment length to numeric data types}
+          \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt\PYZhy{}To\PYZhy{}Income Ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt\PYZhy{}To\PYZhy{}Income}
+          \PY{n}{Ratio}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{].astype(str).str.extract(}\PY{l+s+s1}{\PYZsq{}}\PY{p}{(}\PYZbs{}\PY{n}{d}\PY{o}{+}\PY{p}{)}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{).astype(float)}
+          \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employment Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employment Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{null\PYZus{}counts}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 3182789 entries, 0 to 2859378
+Data columns (total 8 columns):
+Amount Requested        3182789 non-null float64
+Loan Title              3182789 non-null object
+Debt-To-Income Ratio    3182789 non-null float64
+Zip Code                3182789 non-null object
+State                   3182789 non-null object
+Employment Length       3182789 non-null int64
+Policy Code             3182789 non-null float64
+Status                  3182789 non-null int64
+dtypes: float64(3), int64(2), object(3)
+memory usage: 218.5+ MB
+None
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}209}]:}    Amount Requested               Loan Title  Debt-To-Income Ratio Zip Code  \textbackslash{}
+          0           24700.0                 Business                  16.0    577xx   
+          1           17925.0       Debt consolidation                  27.0    432xx   
+          2            9000.0       Debt consolidation                   8.0    346xx   
+          3           11550.0  Credit card refinancing                  21.0    436xx   
+          4           12000.0       Debt consolidation                  23.0    660xx   
+          
+            State  Employment Length  Policy Code  Status  
+          0    SD                 10          1.0       1  
+          1    OH                 10          1.0       1  
+          2    FL                  8          1.0       1  
+          3    OH                  5          1.0       1  
+          4    KS                 10          1.0       1  
+\end{Verbatim}
+\newpage
+            
+        \subsection{Closer Analysis for In-depth Preprocessing}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{c+c1}{\PYZsh{}basic stats for numerical columns}
+          \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{include} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{number}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}210}]:}        Amount Requested  Debt-To-Income Ratio  Employment Length  \textbackslash{}
+          count      3.182789e+06          3.182789e+06       3.182789e+06   
+          mean       1.435574e+04          1.071487e+02       2.113442e+00   
+          std        1.872363e+04          2.039714e+03       2.519112e+00   
+          min        1.000000e+03          0.000000e+00       1.000000e+00   
+          25\%        5.000000e+03          7.000000e+00       1.000000e+00   
+          50\%        1.000000e+04          1.800000e+01       1.000000e+00   
+          75\%        2.000000e+04          3.200000e+01       1.000000e+00   
+          max        4.500000e+05          1.019525e+06       1.000000e+01   
+          
+                  Policy Code        Status  
+          count  3.182789e+06  3.182789e+06  
+          mean   1.302741e-01  1.247814e-01  
+          std    3.446672e-01  3.304710e-01  
+          min    0.000000e+00  0.000000e+00  
+          25\%    0.000000e+00  0.000000e+00  
+          50\%    0.000000e+00  0.000000e+00  
+          75\%    0.000000e+00  0.000000e+00  
+          max    2.000000e+00  1.000000e+00  
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{c+c1}{\PYZsh{}basic stats for categorical columns}
+          \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{include} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{O}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}211}]:}                 Loan Title Zip Code    State
+          count              3182789  3182789  3182789
+          unique                  55      998       49
+          top     debt\_consolidation    112xx       CA
+          freq               1257311    33264   400190
+\end{Verbatim}
+            \newpage
+        \subsection{Observations}
+
+\begin{itemize}
+\tightlist
+\item
+  The Policy Code column appears to contain zeros, although the data
+  dictionary only includes definitions for policy codes of ones and
+  twos.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Since more than half the dataset contains policy code values of 0,
+    and there is no way to intuitively predict what policy code == 0
+    could stand for, I will drop the policy code column.
+  \end{itemize}
+\item
+  There are 55 unique Loan Title values, 998 unique Zip Code values, and
+  49 unique State values.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Due to the high amount of unique Zip Code values, I will drop the
+    Zip Code column as it may be quite messy to one-hot-encode 998
+    unique values, and Zip Code information can also be indirectly
+    inferred from State values.
+  \item
+    The Loan Title values will be analyzed and manually sorted into
+    general, representative categories.
+  \item
+    The State values will be kept as they are.
+  \end{itemize}
+\item
+  From the summary stats tables aboves, it looks like there is a huge
+  outlier in the Debt-To-Income Ratio category - the max value is
+  \(10^5\) times bigger than the 75\% percentile.\footnote{\textbf{\#descriptivestats:} By observing a summary of the descriptive stats of the dataframe, I was able to manually detect irregular discrepancies in the data. In this case, the policy code contains 0 as a minimum (which is not included in the data dictionary), and the Debt-To-Income Ratio has a stark outlier - this is inferred by observing the max value (1.02e+06), which is a few orders of magnitude bigger than the 75\% percentile (3.2e+01). Although the descriptive stats isn't a robust method of analyzing data irregularities, any stark irregularities can be intuitively singled out. }
+
+  \begin{itemize}
+  \tightlist
+  \item
+    While the outlier is erroneous, it is also feasible; there could be
+    an individual out there with very high debt and very low income.
+    Excluding the outlier could then lead to a biased dataset. On the
+    other hand, the outlier may also be a result of human error - in
+    which case the resulting model would not be representative of the
+    data. I have decided to keep the outlier since no robust tests were
+    conducted to determine whether it can be considered a legitimate
+    outlier, and it is possible for an individual to have a very high
+    debt-to-income ratio.
+  \end{itemize}
+\end{itemize}
+
+        \subsubsection{Drop Policy Code Column}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{c+c1}{\PYZsh{}Checking the number of rows with policy code values == 0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of rows where policy code == 0: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{sum(data[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Policy Code}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{] == 0)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}drop Policy Code column}
+          \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Policy Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}peak at the df}
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Number of rows where policy code == 0: 2776895
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}212}]:}    Amount Requested               Loan Title  Debt-To-Income Ratio Zip Code  \textbackslash{}
+          0           24700.0                 Business                  16.0    577xx   
+          1           17925.0       Debt consolidation                  27.0    432xx   
+          2            9000.0       Debt consolidation                   8.0    346xx   
+          3           11550.0  Credit card refinancing                  21.0    436xx   
+          4           12000.0       Debt consolidation                  23.0    660xx   
+          
+            State  Employment Length  Status  
+          0    SD                 10       1  
+          1    OH                 10       1  
+          2    FL                  8       1  
+          3    OH                  5       1  
+          4    KS                 10       1  
+\end{Verbatim}
+
+\subsubsection{Drop Zip Code Column}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{c+c1}{\PYZsh{}Drop the Zip code column}
+          \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Zip Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}peak at the df}
+          \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}213}]:}    Amount Requested               Loan Title  Debt-To-Income Ratio State  \textbackslash{}
+          0           24700.0                 Business                  16.0    SD   
+          1           17925.0       Debt consolidation                  27.0    OH   
+          2            9000.0       Debt consolidation                   8.0    FL   
+          3           11550.0  Credit card refinancing                  21.0    OH   
+          4           12000.0       Debt consolidation                  23.0    KS   
+          
+             Employment Length  Status  
+          0                 10       1  
+          1                 10       1  
+          2                  8       1  
+          3                  5       1  
+          4                 10       1  
+\end{Verbatim}
+            
+    \subsubsection{Sort and One-Hot-Encode Loan Title Column}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{c+c1}{\PYZsh{}Get value counts of loan title column}
+          \PY{n}{loan\PYZus{}titles\PYZus{}value\PYZus{}counts} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{loan\PYZus{}titles\PYZus{}value\PYZus{}counts}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+debt\_consolidation                         1257311
+other                                       339305
+Debt consolidation                          315246
+credit\_card                                 299620
+home\_improvement                            145450
+Credit card refinancing                     128477
+car                                         108601
+moving                                       86701
+Business Loan                                83657
+medical                                      80339
+major\_purchase                               80119
+small\_business                               66971
+house                                        38949
+vacation                                     35370
+Home improvement                             34953
+Other                                        27938
+Major purchase                               11378
+Business                                     11082
+renewable\_energy                              6949
+Medical expenses                              5831
+Car financing                                 5675
+Moving and relocation                         3882
+Vacation                                      3457
+Business Line Of Credit                       2536
+Home buying                                   2485
+Green loan                                     478
+Credit Card/Auto Repair                          1
+freeup                                           1
+Pay off Lowes Card                               1
+SAVE                                             1
+thad31                                           1
+new kitchen for momma!                           1
+Prescription Drug and Medical Costs              1
+althea9621                                       1
+Student Loan                                     1
+dougie03                                         1
+10 months away from being an RN                  1
+New Baby and New House (CC Consolidate)          1
+Business Advertising Loan                        1
+loan                                             1
+considerate                                      1
+Trying to come back to reality!                  1
+Simple Loan Until Contract Is Completed          1
+Consolidation Loan                               1
+Need a decent rate on car financing              1
+educational                                      1
+Consolidate debt                                 1
+Small Business Expansion                         1
+DebtC                                            1
+Auto Financing                                   1
+odymeds                                          1
+new day                                          1
+Paying off higher interest cards \& auto          1
+Learning and training                            1
+smmoore2                                         1
+Name: Loan Title, dtype: int64
+
+    \end{Verbatim}
+
+    From the value count above, we can see the most frequently used loan
+titles (any loan title with value \textgreater{} 1). There are some
+duplicates among these loan titles (e.g. debt\_consolidation \& Debt
+consolidation; home\_improvement \& Home Improvement), and titles which
+belong to the same general category (e.g. renewable\_energy \& Green
+loan; Home improvement \& Home Buying).\\
+
+General categories will be created and the duplicates as well as titles
+with similar meaning will be sorted into the categories as follows:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+General Category & Loan Titles Included\tabularnewline
+\midrule
+\endhead
+Debt Consolidation & debt\_consolidation, Debt
+consolidation,\tabularnewline
+Credit Card & credit\_card, Credit card refinancing\tabularnewline
+House & Home improvement, home\_improvement, house, Home
+buying\tabularnewline
+Car & car, Car financing\tabularnewline
+Major Purchase & major\_purchase, Major purchase\tabularnewline
+Moving & Moving and relocation, moving\tabularnewline
+Business & Business Loan, Business, small\_business, Business Line Of
+Credit\tabularnewline
+Medical & medical, Medical expenses\tabularnewline
+Vacation & vacation, Vacation\tabularnewline
+Green Loan & renewable\_energy, Green loan\tabularnewline
+Other & other, Other, all loan titles with value count ==
+1\tabularnewline
+\bottomrule
+\end{longtable}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{n}{rare\PYZus{}loan\PYZus{}titles} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan}
+          \PY{n}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{].isin(loan\PYZus{}titles\PYZus{}value\PYZus{}counts.index[loan\PYZus{}titles\PYZus{}value\PYZus{}counts == 1])}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{sum(rare\PYZus{}loan\PYZus{}titles)\PYZcb{} loan titles with a value count of 1.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}change value\PYZus{}count == 1 loan titles to \PYZdq{}Other\PYZdq{}}
+          \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{rare\PYZus{}loan\PYZus{}titles}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Other}\PY{l+s+s2}{\PYZdq{}}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+There are 29 loan titles with a value count of 1.
+
+debt\_consolidation         1257311
+other                       339305
+Debt consolidation          315246
+credit\_card                 299620
+home\_improvement            145450
+Credit card refinancing     128477
+car                         108601
+moving                       86701
+Business Loan                83657
+medical                      80339
+major\_purchase               80119
+small\_business               66971
+house                        38949
+vacation                     35370
+Home improvement             34953
+Other                        27967
+Major purchase               11378
+Business                     11082
+renewable\_energy              6949
+Medical expenses              5831
+Car financing                 5675
+Moving and relocation         3882
+Vacation                      3457
+Business Line Of Credit       2536
+Home buying                   2485
+Green loan                     478
+Name: Loan Title, dtype: int64
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{c+c1}{\PYZsh{}Sort loan titles as according to the General Category dictionary above}
+          
+          \PY{c+c1}{\PYZsh{}loan titles dictionary}
+          \PY{n}{loan\PYZus{}titles\PYZus{}dct} \PY{o}{=} \PY{p}{\PYZob{}}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt Consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt\PYZus{}consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt Consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{credit\PYZus{}card}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Credit Card}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Credit card refinancing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Credit Card}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Home improvement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Home improvement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{home\PYZus{}improvement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{house}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Home buying}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Car financing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{major\PYZus{}purchase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major Purchase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major purchase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major Purchase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moving and relocation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moving}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{moving}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moving}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business Loan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{small\PYZus{}business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business Line Of Credit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{medical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medical expenses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vacation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vacation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vacation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vacation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renewable\PYZus{}energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Green Loan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Green loan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Green Loan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Other}\PY{l+s+s1}{\PYZsq{}}
+                            \PY{p}{\PYZcb{}}
+          
+          
+          \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{loan\PYZus{}titles\PYZus{}dct}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Debt Consolidation    1572557
+Credit Card            428097
+Other                  367272
+House                  221837
+Business               164246
+Car                    114276
+Major Purchase          91497
+Moving                  90583
+Medical                 86170
+Vacation                38827
+Green Loan               7427
+Name: Loan Title, dtype: int64
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{c+c1}{\PYZsh{}Check for NaN values}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Presence of NaN values: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{data[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Loan Title}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{].isnull().values.any()\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Presence of NaN values: False
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}236}]:} \PY{c+c1}{\PYZsh{}One\PYZhy{}hot\PYZhy{}encode the Loan Title column}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+          
+          \PY{n}{mlb} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{MultiLabelBinarizer}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{loan\PYZus{}titles\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{mlb}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)),columns=mlb.classes\PYZus{}, index=data.index)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{loan\PYZus{}titles\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{loan\PYZus{}titles\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+(3182789, 11)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}236}]:}    Business  Car  Credit Card  Debt Consolidation  Green Loan  House  \textbackslash{}
+          0         1    0            0                   0           0      0   
+          1         0    0            0                   1           0      0   
+          2         0    0            0                   1           0      0   
+          3         0    0            1                   0           0      0   
+          4         0    0            0                   1           0      0   
+          
+             Major Purchase  Medical  Moving  Other  Vacation  
+          0               0        0       0      0         0  
+          1               0        0       0      0         0  
+          2               0        0       0      0         0  
+          3               0        0       0      0         0  
+          4               0        0       0      0         0  
+\end{Verbatim}
+            
+    \subsubsection{One-Hot-Encode State Column}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{c+c1}{\PYZsh{}Observe and analyze State values}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+CA    400190
+TX    283460
+NY    246080
+FL    241847
+GA    117447
+IL    116277
+PA    115775
+OH    113283
+NJ     99495
+NC     97956
+VA     88273
+MI     85254
+MD     68073
+TN     66279
+AZ     66238
+MA     64275
+WA     58178
+IN     57982
+CO     56771
+AL     55329
+MO     55078
+SC     50255
+LA     49288
+MN     43130
+WI     42167
+CT     39999
+NV     39596
+KY     39349
+OK     35139
+OR     32533
+AR     31347
+MS     29836
+KS     26914
+UT     21207
+NM     18750
+HI     18515
+WV     17398
+NH     13273
+RI     12846
+DE     10471
+NE      8723
+MT      8206
+AK      7313
+SD      6743
+DC      6595
+VT      6448
+WY      6252
+ME      3689
+ND      3267
+Name: State, dtype: int64
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{c+c1}{\PYZsh{}One\PYZhy{}hot\PYZhy{}encode the State column}
+          
+          \PY{n}{mlb} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{MultiLabelBinarizer}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{state\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{mlb}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)),columns=mlb.classes\PYZus{}, index=data.index)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{state\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+(3182789, 49)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}238}]:}    AK  AL  AR  AZ  CA  CO  CT  DC  DE  FL {\ldots}  SD  TN  TX  UT  VA  VT  WA  WI  \textbackslash{}
+          0   0   0   0   0   0   0   0   0   0   0 {\ldots}   1   0   0   0   0   0   0   0   
+          1   0   0   0   0   0   0   0   0   0   0 {\ldots}   0   0   0   0   0   0   0   0   
+          2   0   0   0   0   0   0   0   0   0   1 {\ldots}   0   0   0   0   0   0   0   0   
+          3   0   0   0   0   0   0   0   0   0   0 {\ldots}   0   0   0   0   0   0   0   0   
+          4   0   0   0   0   0   0   0   0   0   0 {\ldots}   0   0   0   0   0   0   0   0   
+          
+             WV  WY  
+          0   0   0  
+          1   0   0  
+          2   0   0  
+          3   0   0  
+          4   0   0  
+          
+          [5 rows x 49 columns]
+\end{Verbatim}
+            
+    \subsection{Create the Full Dataset}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}265}]:} \PY{c+c1}{\PYZsh{}combining everything back together:}
+          \PY{n}{full\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data}\PY{p}{,}\PY{n}{loan\PYZus{}titles\PYZus{}df}\PY{p}{,}\PY{n}{state\PYZus{}df}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{full\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}265}]:}    Amount Requested          Loan Title  Debt-To-Income Ratio State  \textbackslash{}
+          0           24700.0            Business                  16.0    SD   
+          1           17925.0  Debt Consolidation                  27.0    OH   
+          2            9000.0  Debt Consolidation                   8.0    FL   
+          3           11550.0         Credit Card                  21.0    OH   
+          4           12000.0  Debt Consolidation                  23.0    KS   
+          
+             Employment Length  Status  Business  Car  Credit Card  Debt Consolidation  \textbackslash{}
+          0                 10       1         1    0            0                   0   
+          1                 10       1         0    0            0                   1   
+          2                  8       1         0    0            0                   1   
+          3                  5       1         0    0            1                   0   
+          4                 10       1         0    0            0                   1   
+          
+            {\ldots}  SD  TN  TX  UT  VA  VT  WA  WI  WV  WY  
+          0 {\ldots}   1   0   0   0   0   0   0   0   0   0  
+          1 {\ldots}   0   0   0   0   0   0   0   0   0   0  
+          2 {\ldots}   0   0   0   0   0   0   0   0   0   0  
+          3 {\ldots}   0   0   0   0   0   0   0   0   0   0  
+          4 {\ldots}   0   0   0   0   0   0   0   0   0   0  
+          
+          [5 rows x 66 columns]
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}361}]:} \PY{n}{full\PYZus{}data}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 3182789 entries, 0 to 2859378
+Data columns (total 66 columns):
+Amount Requested        float64
+Loan Title              object
+Debt-To-Income Ratio    float64
+State                   object
+Employment Length       int64
+Status                  int64
+Business                int64
+Car                     int64
+Credit Card             int64
+Debt Consolidation      int64
+Green Loan              int64
+House                   int64
+Major Purchase          int64
+Medical                 int64
+Moving                  int64
+Other                   int64
+Vacation                int64
+AK                      int64
+AL                      int64
+AR                      int64
+AZ                      int64
+CA                      int64
+CO                      int64
+CT                      int64
+DC                      int64
+DE                      int64
+FL                      int64
+GA                      int64
+HI                      int64
+IL                      int64
+IN                      int64
+KS                      int64
+KY                      int64
+LA                      int64
+MA                      int64
+MD                      int64
+ME                      int64
+MI                      int64
+MN                      int64
+MO                      int64
+MS                      int64
+MT                      int64
+NC                      int64
+ND                      int64
+NE                      int64
+NH                      int64
+NJ                      int64
+NM                      int64
+NV                      int64
+NY                      int64
+OH                      int64
+OK                      int64
+OR                      int64
+PA                      int64
+RI                      int64
+SC                      int64
+SD                      int64
+TN                      int64
+TX                      int64
+UT                      int64
+VA                      int64
+VT                      int64
+WA                      int64
+WI                      int64
+WV                      int64
+WY                      int64
+dtypes: float64(2), int64(62), object(2)
+memory usage: 1.6+ GB
+
+    \end{Verbatim}
+\newpage
+    \section{Part 2: Modeling \& Evaluation}
+
+Since the goal is to predict the largest loan amount that will be
+successfully funded for a given individual, I will be training a
+logistic regression model to predict the probability that a given
+individual would have their requested amount approved based on the
+following independent variables:
+
+\begin{itemize}
+\tightlist
+\item
+  Amount Requested
+\item
+  Debt-To-Income Ratio
+\item
+  Employment Length
+\item
+  Loan Title (one-hot-encoded)
+\item
+  State (one-hot-encoded)
+\end{itemize}
+
+The response variables will be the status of the loan:
+
+\begin{itemize}
+\tightlist
+\item
+  Status
+
+  \begin{itemize}
+  \tightlist
+  \item
+    1: Approved
+  \item
+    0: Rejected
+  \end{itemize}
+\end{itemize}
+
+    \subsection{Balancing the Response Class}
+
+The response class (Status of Loan) has a rather unbalanced approval to
+rejection class ratio (\textasciitilde{}0.14). To balance the ratio of
+approval to rejection (so that the model is properly trained on
+predicting either class), I will randomly sample from the rejection set
+in order to cut it down to the length of the approval set. Lastly, I
+combine both sets back together.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}372}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          
+          \PY{c+c1}{\PYZsh{}check ratio of approval/rejection class in full\PYZus{}data}
+          \PY{n}{full\PYZus{}data\PYZus{}approvals} \PY{o}{=} \PY{n}{full\PYZus{}data}\PY{p}{[}\PY{n}{full\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{full\PYZus{}data\PYZus{}rejections} \PY{o}{=} \PY{n}{full\PYZus{}data}\PY{p}{[}\PY{n}{full\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of approvals in original data: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{len(full\PYZus{}data\PYZus{}approvals)\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of rejections in original data: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{len(full\PYZus{}data\PYZus{}rejections)\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ratio of approval/rejection:}
+          \PY{p}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{full\PYZus{}data\PYZus{}approvals}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{full\PYZus{}data\PYZus{}rejections}\PY{p}{)}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          
+          \PY{c+c1}{\PYZsh{}remove some rejection data to obtain a dataset with balanced predictor classes}
+          \PY{n}{full\PYZus{}data\PYZus{}rejection\PYZus{}sample} \PY{o}{=} \PY{n}{full\PYZus{}data\PYZus{}rejections}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{full\PYZus{}data\PYZus{}approvals}\PY{p}{)}\PY{p}{)}
+          \PY{n}{full\PYZus{}data\PYZus{}balanced} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{full\PYZus{}data\PYZus{}rejection\PYZus{}sample}\PY{p}{,}\PY{n}{full\PYZus{}data\PYZus{}approvals}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of approvals in balanced data:}
+          \PY{p}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of rejections in balanced data:}
+          \PY{p}{\PYZob{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ratio of approval/rejection: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{len(full\PYZus{}data\PYZus{}balanced[full\PYZus{}data\PYZus{}balanced[}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZdq{}}
+          \PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Number of approvals in original data: 397153
+Number of rejections in original data: 2785636
+Ratio of approval/rejection: 0.1425717502214934
+
+Number of approvals in balanced data: 397153
+Number of rejections in balanced data: 397153
+Ratio of approval/rejection: 1.0
+
+    \end{Verbatim}
+
+    \subsection{Preventing Overfit: Splitting Data \& Cross-Validation}
+
+The balanced dataset is split into training and test sets to prevent
+overfitting. Cross-validation will be conducted on the training set to
+finetune the hyperparameters of the model. It is important that the
+cross-validation process never sees the testing dataset in order to
+avoid information leakage and overfitting.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}376}]:} \PY{c+c1}{\PYZsh{}separate dataset into independent variables (X) and dependent variable (y)}
+          \PY{n}{X} \PY{o}{=} \PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loan Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{full\PYZus{}data\PYZus{}balanced}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}splitting the data}
+          \PY{c+c1}{\PYZsh{}choose a small training size to speed up the model fitting process}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{stratify} \PY{o}{=} \PY{n}{y}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+(476583, 63) (317723, 63) (476583,) (317723,)
+
+    \end{Verbatim}
+
+    \subsection{Cross-validation}
+
+In the cross-validation process, only the training data is used. The
+LogisticRegressionCV function is used for cross-validation since it is
+more efficient than using the brute force parameter search provided by
+the GridSearchCV function.\footnote{\url{https://scikit-learn.org/stable/modules/grid\_search.html\#multimetric-grid-search}}
+\\
+
+The LogisticRegressionCV function is mainly used to optimize for C, i.e.
+the inverse of regularization parameter values. When an integer is
+provided for the C parameter, e.g. Cs = 10, then a grid of Cs values are
+chosen in a logarithmic scale between 1e-4 and 1e4. \footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.linear\_model.LogisticRegressionCV.html\#sklearn.linear\_model.LogisticRegressionCV}}
+
+I have chosen to perform cross-validation on:
+
+\begin{itemize}
+\tightlist
+\item
+  a logistic regression model using a liblinear solver with l1 penalty
+\item
+  a logistic regression model using a liblinear solver with l2 penalty
+\item
+  a logistic regression model using a lbfgs solver (lbfgs solver only
+  supports l2 penalty, which is the default)
+\end{itemize}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}419}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}\PY{p}{,}\PY{n}{LogisticRegressionCV}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+          
+          \PY{n}{logr\PYZus{}lib\PYZus{}l1} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}
+          \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{logr\PYZus{}lib\PYZus{}l2} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}
+          \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{logr\PYZus{}lbfgs} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lbfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}420}]:} \PY{n}{logr\PYZus{}models} \PY{o}{=} \PY{p}{[}\PY{n}{logr\PYZus{}lib\PYZus{}l1}\PY{p}{,}\PY{n}{logr\PYZus{}lib\PYZus{}l2}\PY{p}{,}\PY{n}{logr\PYZus{}lbfgs}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using different solvers, optimizing for C.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{model} \PY{o+ow}{in} \PY{n}{logr\PYZus{}models}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{str(model)\PYZcb{}.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C used for cross\PYZhy{}validation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}model.Cs\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C that maps to the best scores across every class: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}model.C\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Grid of scores obtained during cross\PYZhy{}validating each fold:}
+          \PYZbs{}\PY{n}{n}\PY{p}{\PYZob{}}\PY{n}{model}\PY{o}{.}\PY{n}{scores\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean accuracy score: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{np.mean(model.scores\PYZus{}[1])\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{classification\PYZus{}report(y\PYZus{}train,}
+          \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression CV results using different solvers, optimizing for C.
+
+Logistic Regression CV results using LogisticRegressionCV(Cs=10, class\_weight=None,
+cv=None, dual=False,
+           fit\_intercept=True, intercept\_scaling=1.0, max\_iter=100,
+           multi\_class='ovr', n\_jobs=1, penalty='l1', random\_state=None,
+           refit=True, scoring=None, solver='liblinear', tol=0.0001,
+           verbose=0).
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[2.7825594]
+
+Grid of scores obtained during cross-validating each fold:
+[[0.81104984 0.81417834 0.82075638 0.82226083 0.82255039 0.82251892
+  0.82248115 0.82248744 0.82248744 0.82248744]
+ [0.80908467 0.81206841 0.81825621 0.81957812 0.81961589 0.8197292
+  0.81974179 0.81974808 0.81973549 0.81974808]
+ [0.81011583 0.81342692 0.81963364 0.82093667 0.82104369 0.82106887
+  0.82104998 0.82104369 0.82104369 0.82104369]]
+
+Mean accuracy score:
+0.819032358927715
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.78      0.90      0.83    238291
+          1       0.88      0.74      0.81    238292
+
+avg / total       0.83      0.82      0.82    476583
+
+Logistic Regression CV results using LogisticRegressionCV(Cs=10, class\_weight=None,
+cv=None, dual=False,
+           fit\_intercept=True, intercept\_scaling=1.0, max\_iter=100,
+           multi\_class='ovr', n\_jobs=1, penalty='l2', random\_state=None,
+           refit=True, scoring=None, solver='liblinear', tol=0.0001,
+           verbose=0).
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[0.35938137]
+
+Grid of scores obtained during cross-validating each fold:
+[[0.81181151 0.81644446 0.8212096  0.82113407 0.82226712 0.82219159
+  0.82225454 0.82226083 0.82226712 0.82227971]
+ [0.81007296 0.81479407 0.81768968 0.8181492  0.81819956 0.81819956
+  0.81819956 0.81934521 0.81820585 0.81821215]
+ [0.81090268 0.81626589 0.81264006 0.82076671 0.82091149 0.82077301
+  0.82076671 0.81962734 0.81972806 0.82076671]]
+
+Mean accuracy score:
+0.8186112343554276
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.77      0.90      0.83    238291
+          1       0.89      0.74      0.80    238292
+
+avg / total       0.83      0.82      0.82    476583
+
+Logistic Regression CV results using LogisticRegressionCV(Cs=10, class\_weight=None,
+cv=None, dual=False,
+           fit\_intercept=True, intercept\_scaling=1.0, max\_iter=100,
+           multi\_class='ovr', n\_jobs=1, penalty='l2', random\_state=None,
+           refit=True, scoring=None, solver='lbfgs', tol=0.0001, verbose=0).
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[2.7825594]
+
+Grid of scores obtained during cross-validating each fold:
+[[0.8039934  0.8039934  0.8039934  0.8039934  0.8039934  0.8039997
+  0.8039934  0.8039934  0.8039934  0.8039934 ]
+ [0.80166938 0.80166938 0.80166938 0.80166938 0.80166938 0.80166938
+  0.80166938 0.80166938 0.80166938 0.80166938]
+ [0.80292711 0.80292711 0.80292711 0.80292711 0.80292711 0.80292711
+  0.80292711 0.80292711 0.80292711 0.80292711]]
+
+Mean accuracy score:
+0.802863507370328
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.76      0.90      0.82    238291
+          1       0.87      0.71      0.78    238292
+
+avg / total       0.81      0.80      0.80    476583
+
+
+    \end{Verbatim}
+\newpage
+    \subsection{Feature-scaling Models}
+
+I feature-scaled the independent variables to lie between 0 and 1 using
+a MinMaxScaler. Feature-scaling may improve the model if "noisy"
+variables had an unjustly high weight, while important variables had
+comparatively low weights. However, it may also decrease model accuracy
+if the "noisy" variables were already weighted low and the important
+variables were already weighted high in the original data; in such a
+case, feature-scaling would only emphasize the noise by giving it equal
+weightage as the important predictors.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}413}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+          
+          \PY{c+c1}{\PYZsh{}try with feature scaling}
+          \PY{n}{min\PYZus{}max\PYZus{}scaler} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
+          \PY{n}{X\PYZus{}train\PYZus{}scaled} \PY{o}{=} \PY{n}{min\PYZus{}max\PYZus{}scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+          
+          \PY{n}{logr\PYZus{}lib\PYZus{}l1\PYZus{}scaled} \PY{o}{=}
+          \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}scaled}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{logr\PYZus{}lib\PYZus{}l2\PYZus{}scaled} \PY{o}{=}
+          \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{penalty}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}scaled}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}418}]:} \PY{n}{logr\PYZus{}scaled\PYZus{}models} \PY{o}{=} \PY{p}{[}\PY{n}{logr\PYZus{}lib\PYZus{}l1\PYZus{}scaled}\PY{p}{,}\PY{n}{logr\PYZus{}lib\PYZus{}l2\PYZus{}scaled}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using liblinear solver with scaled features,}
+          \PY{n}{optimizing} \PY{k}{for} \PY{n}{C}\PY{o}{.}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+          
+          \PY{k}{for} \PY{n}{model} \PY{o+ow}{in} \PY{n}{logr\PYZus{}scaled\PYZus{}models}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{str(model)\PYZcb{}.}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C used for cross\PYZhy{}validation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}model.Cs\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C that maps to the best scores across every class: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}model.C\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Grid of scores obtained during cross\PYZhy{}validating each fold:}
+          \PYZbs{}\PY{n}{n}\PY{p}{\PYZob{}}\PY{n}{model}\PY{o}{.}\PY{n}{scores\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean accuracy score: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{np.mean(model.scores\PYZus{}[1])\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{classification\PYZus{}report(y\PYZus{}train,}
+          \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}scaled}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression CV results using liblinear solver with scaled features, optimizing
+for C.
+
+Logistic Regression CV results using LogisticRegressionCV(Cs=10, class\_weight=None,
+cv=None, dual=False,
+           fit\_intercept=True, intercept\_scaling=1.0, max\_iter=100,
+           multi\_class='ovr', n\_jobs=1, penalty='l1', random\_state=None,
+           refit=True, scoring=None, solver='liblinear', tol=0.0001,
+           verbose=0).
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[2.7825594]
+
+Grid of scores obtained during cross-validating each fold:
+[[0.78129446 0.81081064 0.81713689 0.82349461 0.82197757 0.82376528
+  0.8231358  0.82256927 0.82250003 0.82248115]
+ [0.77944241 0.80902802 0.81520323 0.82001246 0.82058529 0.82164282
+  0.82015095 0.81974808 0.81975438 0.81974179]
+ [0.78140501 0.81015359 0.81630366 0.82128919 0.82176759 0.82293214
+  0.8218872  0.82113811 0.8210311  0.82104369]]
+
+Mean accuracy score:
+0.8157808796758563
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.78      0.91      0.84    238291
+          1       0.89      0.74      0.81    238292
+
+avg / total       0.83      0.82      0.82    476583
+
+Logistic Regression CV results using LogisticRegressionCV(Cs=10, class\_weight=None,
+cv=None, dual=False,
+           fit\_intercept=True, intercept\_scaling=1.0, max\_iter=100,
+           multi\_class='ovr', n\_jobs=1, penalty='l2', random\_state=None,
+           refit=True, scoring=None, solver='liblinear', tol=0.0001,
+           verbose=0).
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[10000.]
+
+Grid of scores obtained during cross-validating each fold:
+[[0.81154083 0.81285644 0.82007654 0.82100188 0.82124108 0.82137327
+  0.82202163 0.82245597 0.82317987 0.82300361]
+ [0.81008555 0.80911615 0.81792259 0.81952776 0.81982362 0.81996211
+  0.82040274 0.82065453 0.8208182  0.82097557]
+ [0.812596   0.8135717  0.82113811 0.82152209 0.82160393 0.82172983
+  0.82220823 0.82233413 0.82207604 0.82217046]]
+
+Mean accuracy score:
+0.8192996817342216
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.78      0.91      0.84    238291
+          1       0.89      0.74      0.81    238292
+
+avg / total       0.83      0.82      0.82    476583
+
+
+    \end{Verbatim}
+\newpage
+    \subsection{Best Hyperparameters}
+
+From the results, it appears that the logistic regression model using a
+liblinear solver with l2 penalty, with feature-scaling, has the highest
+accuracy, precision, and recall:
+
+\begin{itemize}
+\tightlist
+\item
+  accuracy: 0.819299
+\item
+  precision: 0.83
+\item
+  recall: 0.82
+\end{itemize}
+
+Without feature scaling, the logistic regression model using a liblinear
+solver with l1 penalty has the best performance:
+
+\begin{itemize}
+\tightlist
+\item
+  accuracy: 0.819032
+\item
+  precision: 0.83
+\item
+  recall: 0.82
+\end{itemize}
+
+Since the accuracy is only off by a negligable amount, and
+feature-scaling takes up additional resources, I will use the logistic
+regression model using a liblinear solver with l1 penalty to predict the
+results of the test data.
+
+    \subsection{Model Evaluation}
+
+The chosen model is applied on the testing set to measure its
+performance. The accuracy, precision, and recall scores shown below
+suggest that the model is performing quite well.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}428}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{logr\PYZus{}lib\PYZus{}l1}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy score: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{logr\PYZus{}lib\PYZus{}l1.score(X\PYZus{}test,y\PYZus{}test)\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Classification report: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{classification\PYZus{}report(y\PYZus{}test, y\PYZus{}pred)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Accuracy score: 0.8206236249815091
+
+Classification report:
+             precision    recall  f1-score   support
+
+          0       0.78      0.90      0.83    158862
+          1       0.88      0.74      0.80    158861
+
+avg / total       0.83      0.82      0.82    317723
+
+
+    \end{Verbatim}
+\newpage
+    \subsection{Predicting Highest Loan Amount for Approval}
+
+The predicted probabilities of being approved or rejected by the lending
+club based on the independent variables of amount requested,
+debt-to-income ratio, employment length, loan title (one-hot-encoded),
+and state (one-hotencoded) can also be obtained from the logistic
+regression model. By setting a boundary of 0.95 approval as a safe
+threshold for approval, we can advise customers on the highest loan
+amount they could potentially borrow by inputting their data into the
+model, and tweaking the amount requested until the 0.95 approval
+boundary is achieved.\footnote{\textbf{\#probability:} I used the best logistic regression model out of all the trained models to predict the probability of loan approval on the unseen test set. The probability can be set at a specific threshold (in this case, 0.95), and the various features can then be manipulated to obtain the probability threshold that satisfies our decision boundary. If we had a higher tolerance for loan rejection, we could set the probability threshold to a lower level, e.g. 0.75. Probability is thus used as a way to gauge and predict the highest loan amount that we would safely advise to a customer.}\\
+
+The dataframe below displays a small snapshot of individual features
+that resulted in \textgreater{}= 0.95 probability of approval.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}497}]:} \PY{n}{y\PYZus{}proba\PYZus{}pred} \PY{o}{=} \PY{n}{logr\PYZus{}lib\PYZus{}l1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n}{X\PYZus{}test\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          \PY{n}{y\PYZus{}proba\PYZus{}pred\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{y\PYZus{}proba\PYZus{}pred}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{predictions\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{X\PYZus{}test\PYZus{}df}\PY{p}{,}\PY{n}{y\PYZus{}proba\PYZus{}pred\PYZus{}df}\PY{p}{]}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df\PYZus{}high\PYZus{}approval} \PY{o}{=} \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.95}\PY{p}{]}
+          \PY{n}{predictions\PYZus{}df\PYZus{}high\PYZus{}approval}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}497}]:}     Amount Requested  Debt-To-Income Ratio  Employment Length  Business  Car  \textbackslash{}
+          3            12000.0                  12.0                 10         0    0   
+          19            9000.0                  18.0                 10         0    0   
+          21           10000.0                  14.0                 10         0    0   
+          24           25000.0                   4.0                 10         0    0   
+          25           12000.0                   4.0                 10         0    0   
+          
+              Credit Card  Debt Consolidation  Green Loan  House  Major Purchase  \textbackslash{}
+          3             0                   0           0      0               1   
+          19            0                   1           0      0               0   
+          21            0                   1           0      0               0   
+          24            0                   0           0      1               0   
+          25            0                   0           0      0               0   
+          
+                {\ldots}     TX  UT  VA  VT  WA  WI  WV  WY         0         1  
+          3     {\ldots}      0   0   0   0   0   0   0   0  0.037430  0.962570  
+          19    {\ldots}      0   0   1   0   0   0   0   0  0.016704  0.983296  
+          21    {\ldots}      0   0   0   0   0   0   0   0  0.013274  0.986726  
+          24    {\ldots}      0   0   0   0   0   0   0   0  0.024434  0.975566  
+          25    {\ldots}      0   0   0   0   1   0   0   0  0.039848  0.960152  
+          
+          [5 rows x 65 columns]
+\end{Verbatim}
+            \newpage
+        \subsubsection{Example Customer}
+
+The predictive model is tested on an example customer, Bob, who has a
+Debt-To-Income Ratio of 3, Employment Length of 7 years, is taking a
+loan for Debt Consolidation, and lives in California.\\
+
+While testing the model, I experienced the following behavior:
+
+\begin{itemize}
+\tightlist
+\item
+  for a given set of customer stats, the model plateaus at a fixed
+  probability of approval, insensitive to large amount changes.
+\item
+  increasing the amount requested increased the probability of the loan
+  being approved.
+\end{itemize}
+
+Some reasons for this behavior are conjectured as follows: - Other
+variables might play a much more significant role of predicting loan
+approval or rejection, and so changes in the amount requested do not do
+much to increase or decrease the customer's chances of getting a loan. -
+A higher amount requested could also correlate with better customer
+stats, and so the model might have ended up learning that with a given
+set of "approvable" stats, a higher requested amount means a higher rate
+of approval.\\
+
+As opposed to changing the amount requested, a variable which seems to
+be extremely responsive in terms of affecting a customer's loan status
+is the employment length. A higher employment length starkly increases
+the probability of loan approval and vice versa. This makes intuitive
+sense since a person with longer employment length would most likely be
+able to pay off the loan since they have a constant, stable stream of
+income.\\
+
+Both predictive behaviors for Bob are demonstrated below.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}680}]:} \PY{n}{bob} \PY{o}{=} \PY{p}{\PYZob{}}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount Requested}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{10000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt\PYZhy{}To\PYZhy{}Income Ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employment Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Credit Card}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt Consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Green Loan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Major}
+          \PY{n}{Purchase}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:0,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Medical}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:0,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Moving}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:0,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Other}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:0,}\PY{l+s+s1}{\PYZsq{}}\PY{n}{Vacation}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:0,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AZ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CO}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{DE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{IN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MO}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ND}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NJ}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OH}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TX}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{VT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WY}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}
+                  \PY{p}{\PYZcb{}}
+          
+          \PY{n}{bob\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{bob}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{With Debt\PYZhy{}To\PYZhy{}Income Ratio of 3.0, Employment Length 7, Debt Consolidation and}
+          \PY{n}{CA}\PY{p}{:}\PYZbs{}\PY{n}{n}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{60000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{:}
+              \PY{n}{bob\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount Requested}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+              \PY{n}{bob\PYZus{}pred} \PY{o}{=} \PY{n}{logr\PYZus{}lib\PYZus{}l1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{bob\PYZus{}df}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amount Requested: }\PY{l+s+si}{\PYZob{}i\PYZcb{}}\PY{l+s+s2}{. Probability of approval: }\PY{l+s+si}{\PYZob{}bob\PYZus{}pred[0][1]\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{With Amount Requested of 10000, Debt\PYZhy{}To\PYZhy{}Income Ratio of 3.0, Debt Consolidation}
+          \PY{o+ow}{and} \PY{n}{CA}\PY{p}{:}\PYZbs{}\PY{n}{n}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+              \PY{n}{bob\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employment Length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+              \PY{n}{bob\PYZus{}pred} \PY{o}{=} \PY{n}{logr\PYZus{}lib\PYZus{}l1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{bob\PYZus{}df}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Employment Length: }\PY{l+s+si}{\PYZob{}i\PYZcb{}}\PY{l+s+s2}{. Probability of approval: }\PY{l+s+si}{\PYZob{}bob\PYZus{}pred[0][1]\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+With Debt-To-Income Ratio of 3.0, Employment Length 7, Debt Consolidation and CA.:
+
+Amount Requested: 10000. Probability of approval: 0.9432501811402284
+
+Amount Requested: 20000. Probability of approval: 0.9444063842278166
+
+Amount Requested: 30000. Probability of approval: 0.9455403912338444
+
+Amount Requested: 40000. Probability of approval: 0.9466525732485206
+
+Amount Requested: 50000. Probability of approval: 0.9477432973968143
+
+With Amount Requested of 10000, Debt-To-Income Ratio of 3.0, Debt Consolidation and
+CA.:
+
+Employment Length: 0. Probability of approval: 0.27943664927698353
+
+Employment Length: 2. Probability of approval: 0.5377687181673515
+
+Employment Length: 4. Probability of approval: 0.777297113653875
+
+Employment Length: 6. Probability of approval: 0.9128232861071167
+
+Employment Length: 8. Probability of approval: 0.9691483057945611
+
+Employment Length: 10. Probability of approval: 0.9895002327730532
+
+
+    \end{Verbatim}
+
+        \subsection{Data Visualizations - Feature values which lead to higher probability of
+approval}
+
+Below are some bar plots visualizing various feature values, ordered by
+the top 10 highest mean probabilities of approval. While most of the
+value changes don't appear to lead to significant changes in the
+probability, there are some categories - most noticeably "Employment
+Length" - that display a relatively clear relationship between the
+feature value and the mean probability of being approved. For
+"Employment Length", we can see that as the "Employment Length"
+decreases, the probability of being accepted for a loan also decreases.\\
+
+Only a few feature categories were plotted since this is more for
+interest and observation vs a rigorous form of analysis; the
+multidimensional nature of the problem means that plotting single
+features against the probability will not provide robust results. Also,
+do note that the x-axis is not in order, and the y-axis has a trimmed
+scale in order to show the minute differences between the data. For best
+results, the trained model should be used directly.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}581}]:} \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}
+          \PY{n}{Requested}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]).mean().nlargest(10).plot.bar(ylim=(0.96,1))}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Debt\PYZhy{}To\PYZhy{}Income}
+          \PY{n}{Ratio}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]).mean().nlargest(10).plot.bar(ylim=(0.59,0.61))}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Employment}
+          \PY{n}{Length}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]).mean().nlargest(10).plot.bar(ylim=(0,1))}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Business}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ylim}\PY{o}{=}
+          \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Green}
+          \PY{n}{Loan}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{]).mean().nlargest(10).plot.bar(ylim=(0,1))}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{predictions\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{House}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{ylim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}
+          \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}581}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1571b1668>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment-2-lending-data_files/assignment-2-lending-data_53_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Summary}
+
+In this report, I built a logistic regression model that
+can predict the probability of a loan being approved or rejected based
+on various features provided by the customer.
+
+    \subsection{Variables included in the model}
+
+The independent variables included in the model were: Amount Requested,
+Debt-To-Income Ratio, Employment Length, Loan Title (one-hot-encoded),
+State (one-hot-encoded). The response variables were the status of the
+loan, with 1 signifying an approved loan and 0 signifying a rejected
+loan.
+
+    \subsection{Cleaning and transformations on the data}
+
+The following steps were taken to clean and transform the data for
+training and testing:
+
+\begin{itemize}
+\tightlist
+\item
+  Dropping columns that were not present in both the approval and
+  rejection data.
+\item
+  Dropping columns with a high amount of irregular values (more than
+  half).
+\item
+  Dropping rows with NaNs.
+\item
+  Converting variables to the appropriate data types.
+\item
+  Dropping categorical variables with a high number of discrete
+  categories (in this case, 998 categories for unique zip codes).
+\item
+  One-hot-encoding categorical variables that were kept (loan titles,
+  states).
+\item
+  Balancing the response variable class so that the ratio of approval to
+  rejections is 1.0 in the entire dataset, and the same balanced ratio
+  is transferred into the training and test sets.
+\item
+  Feature scaling the independent variables to see whether that improves
+  the model's performance.
+\end{itemize}
+
+    \subsection{The type of model used and model settings}
+
+A logistic regression model was used to predict the probability of
+getting a loan approval since logistic regression is suitable for
+modeling binary dependent variables. Cross-validation was conducted to
+finetune the best hyperparameters for the model. The parameters tuned
+were the Cs, i.e. the inverse of regularization parameter values; the
+normalization penalty, i.e. L1 or L2; and the type of solver, e.g.
+liblinear, lbfgs (limited memory Broyden--Fletcher--Goldfarb--Shann
+algorithm). The final model settings chosen - based on the model's
+performance on the training data - are C: 2.78, solver: liblinear,
+penalty: L1.\\
+
+With feature-scaled variables, the best performing model had the
+following parameters: C: 10000, solver: liblinear, penalty: L2. The two
+best performing models (with feature-scaling vs without feature-scaling)
+only differered by a miniscule amount in terms of accuracy score
+(0.81929 vs 0.81903 respectively), and had the same average precision
+and recall scores of 0.83 and 0.82. Since feature-scaling would require
+additional computational resource, I have decided to use the model that
+did not require feature-scaling (C: 2.78, liblinear, L1 penalty).\footnote{\textbf{\#regression: }The bulk of this assignment hinges on the development and training of a logistic regression model to predict the probability of loan approval for a given customer based on various independent variables. I provided motivation for the use of logistic regression (modeling binary dependent variables), used cross-validation to finetune various hyperparameters of the model, and trained the model on both feature-scaled and non-feature-scaled data to obtain the model with the best performance to be used on unseen test data. The chosen model is then used to predict the probability of approval for a manually constructed customer.}
+
+    \subsection{Training method used, and techniques to avoid overfitting the data}
+
+To train the model, the data was split into a training and test set with
+0.4 test size and 0.6 training size, i.e. 317723 data points for the
+test set, and 476583 for the training set. By only performing
+cross-validation on the training set, overfitting is prevented since the
+test set remains unseen by the model until the final performance testing
+stage. The LogisticRegressionCV from the sklearn library is used for
+cross-validation since is it more efficient than using a brute force
+search over the parameter space, e.g. GridSearchCV.\footnote{\url{
+https://scikit-learn.org/stable/modules/grid\_search.html\#grid-search}}
+The LogisticRegressionCV function is used with different solvers and
+optimizes for C. The best performing model is then chosen to predict
+results for the test data.
+
+    \subsection{Estimate of how well the model will perform on unseen data}
+
+The model has a relatively good performance on the test data, returning
+an accuracy of 0.82, average precision of 0.83, and average recall of
+0.82. As such, I infer that the model would show a similar performance
+on a different set of unseen data.
+
+    \subsection{Assumptions}
+
+\begin{itemize}
+\tightlist
+\item
+  The model was only trained on 2015 data, so the performance might be
+  subpar when used on data with a stark difference in time frame.
+\item
+  The model might be even more accurate with less features (some of
+  these features could just be noise), but this was not tested.
+\item
+  Some significant features may have been left out during the data
+  cleaning process. As such, it is difficult to determine whether there
+  were confounding features that could be affecting the data. That being
+  said, the model does appear to work well as a predictive model.
+\item
+  The loan titles were manually categorized by my personal judgement.
+  While I believe that I have categorized them reasonably, I could be
+  unaware that some categories whould be more appropriately categorized
+  together/separated.
+\end{itemize}
+\newpage
+\section{Appendix}
+Code in Jupyter Notebook format is available online at: \br
+
+\url{https://github.com/hueyning/cs156-ml/blob/master/assignment-2-lending-data/assignment-2-lending-data.ipynb}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

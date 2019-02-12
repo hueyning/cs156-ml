@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{Data Cleaning and Preprocessing}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{ Importing Libraries and Importing Data}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Choosing which columns to keep}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Closer Analysis for In-depth Preprocessing}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Observations}{section.1}% 5
+\BOOKMARK [3][-]{subsubsection.1.4.1}{Drop Policy Code Column}{subsection.1.4}% 6
+\BOOKMARK [3][-]{subsubsection.1.4.2}{Drop Zip Code Column}{subsection.1.4}% 7
+\BOOKMARK [3][-]{subsubsection.1.4.3}{Sort and One-Hot-Encode Loan Title Column}{subsection.1.4}% 8
+\BOOKMARK [3][-]{subsubsection.1.4.4}{One-Hot-Encode State Column}{subsection.1.4}% 9
+\BOOKMARK [2][-]{subsection.1.5}{Create the Full Dataset}{section.1}% 10
+\BOOKMARK [1][-]{section.2}{Part 2: Modeling \046 Evaluation}{}% 11
+\BOOKMARK [2][-]{subsection.2.1}{Balancing the Response Class}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.2}{Preventing Overfit: Splitting Data \046 Cross-Validation}{section.2}% 13
+\BOOKMARK [2][-]{subsection.2.3}{Cross-validation}{section.2}% 14
+\BOOKMARK [2][-]{subsection.2.4}{Feature-scaling Models}{section.2}% 15
+\BOOKMARK [2][-]{subsection.2.5}{Best Hyperparameters}{section.2}% 16
+\BOOKMARK [2][-]{subsection.2.6}{Model Evaluation}{section.2}% 17
+\BOOKMARK [2][-]{subsection.2.7}{Predicting Highest Loan Amount for Approval}{section.2}% 18
+\BOOKMARK [3][-]{subsubsection.2.7.1}{Example Customer}{subsection.2.7}% 19
+\BOOKMARK [2][-]{subsection.2.8}{Data Visualizations - Feature values which lead to higher probability of approval}{section.2}% 20
+\BOOKMARK [1][-]{section.3}{Summary}{}% 21
+\BOOKMARK [2][-]{subsection.3.1}{Variables included in the model}{section.3}% 22
+\BOOKMARK [2][-]{subsection.3.2}{Cleaning and transformations on the data}{section.3}% 23
+\BOOKMARK [2][-]{subsection.3.3}{The type of model used and model settings}{section.3}% 24
+\BOOKMARK [2][-]{subsection.3.4}{Training method used, and techniques to avoid overfitting the data}{section.3}% 25
+\BOOKMARK [2][-]{subsection.3.5}{Estimate of how well the model will perform on unseen data}{section.3}% 26
+\BOOKMARK [2][-]{subsection.3.6}{Assumptions}{section.3}% 27
+\BOOKMARK [1][-]{section.4}{Appendix}{}% 28
