@@ -1,0 +1,1032 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment 3: Machine Learning Fashionista}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+   
+
+\section*{Dimensionality Reduction: PCA vs LDA}
+
+In this assignment, we compare the results of using PCA, LDA, or neither
+when training a Logistic Regression classifier on a dataset of pictures
+of Jerseys, Shirts, Men's clothing and Women's clothing downloaded from
+ImageNet.\\
+
+\textbf{Instructions:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Split your dataset from the PCA pre-class work into 80\% training data
+  and 20\% testing data.
+\item
+  Build a simple linear classifier using the original pixel data. There
+  are several options that you can try:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  linear SVC\\
+
+\item
+  logistic classifier
+\end{itemize}
+
+What is your error rate on the training data? What is your error rate on
+your testing data?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\item
+  Train the same linear model as in question 1, but now on the reduced
+  representation that you created using PCA. What is your error rate on
+  the training data? What is your error rate on your testing data?
+\item
+  Train the same linear model as in question 1, but now on the reduced
+  representation that you created using LDA. What is your error rate on
+  the training data? What is your error rate on your testing data?
+\item
+  Write three paragraphs, describing and interpreting your results from
+  questions 1, 2, and 3. Make a recommendation on which classifier you
+  would prefer, and why.
+\end{enumerate}
+\newpage
+    \section{Cleaning and Processing Data}
+
+    \subsection{Manual Cleaning of Data}
+
+I manually filtered and sorted the men and women clothing data by
+removing/cropping: - pictures with more than one person or one clothing
+item. - pictures where more than 50\% of the shirt is hidden. -
+miscategorized pictures. - pictures of folded clothing items.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{import} \PY{n+nn}{collections}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{imread\PYZus{}collection}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{transform} \PY{k}{import} \PY{n}{resize}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}my path}
+        \PY{n}{men\PYZus{}dir} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{men\PYZus{}clothing/*.JPEG}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{women\PYZus{}dir} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{women\PYZus{}clothing/*.JPEG}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{}creating a collection with the available images}
+        \PY{n}{men} \PY{o}{=} \PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{n}{men\PYZus{}dir}\PY{p}{)}
+        \PY{n}{women} \PY{o}{=} \PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{n}{women\PYZus{}dir}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of men clothing pictures: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(men)\PYZcb{}.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of women clothing pictures: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(women)\PYZcb{}.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}import sklearn libraries}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{discriminant\PYZus{}analysis} \PY{k}{import} \PY{n}{LinearDiscriminantAnalysis} \PY{k}{as} \PY{n}{LDA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}\PY{p}{,}\PY{n}{LogisticRegressionCV}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+\end{Verbatim}
+
+    \subsection{Resizing, Reshaping and Balancing}
+
+I resized all the pictures to have same dimension of height and width of
+250, 200. I then flattened the 3 dimensions of height, width, and RGB
+channels of each image into an array of pixels to input into the
+logistic regression classifier. Since the size of the women dataset is
+greater than the men's dataset (944 vs 698), I trained two
+LogisticRegressionCV models:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  One on the original unbalanced set, where I set the class\_weight
+  parameter to 'balanced' to automatically weigh classes inversely
+  proportional to their frequency.
+\item
+  The second on a manually trimmed and balanced women and men dataset
+  (both containing 698 data points).
+\end{enumerate}
+
+I then observed which model provided better training and
+cross-validation results (cross-validation for C-value is inbuilt into
+the LogisticRegressionCV function) and chose to subsequently train the
+reduced-dimensionality methods (PCA \& LDA) on the training set that
+provided lower error rates.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}height and width of resized image}
+        \PY{n}{new\PYZus{}height} \PY{o}{=} \PY{l+m+mi}{250}
+        \PY{n}{new\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{200}
+        
+        \PY{c+c1}{\PYZsh{}resize images in dataset}
+        \PY{n}{men\PYZus{}resized} \PY{o}{=} \PY{p}{[}\PY{n}{resize}\PY{p}{(}\PY{n}{men}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{)}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
+        \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{men}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        \PY{n}{women\PYZus{}resized} \PY{o}{=} \PY{p}{[}\PY{n}{resize}\PY{p}{(}\PY{n}{women}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{)}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in}
+        \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{women}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}peak at the resized images vs original images}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,}
+                               \PY{n}{subplot\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,}
+                               \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{men}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{men\PYZus{}resized}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{women}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{women\PYZus{}resized}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Men Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Men Resized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Women Original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Women Resized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} Text(0,0.5,'Women Resized')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment-3-machine-learning-fashionista_files/assignment-3-machine-learning-fashionista_6_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}Reshape images to flattened array}
+        \PY{n}{men\PYZus{}arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{men\PYZus{}resized}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}original women array size}
+        \PY{n}{og\PYZus{}women\PYZus{}arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{women\PYZus{}resized}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original length men data:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{men\PYZus{}arr}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original length women data:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{og\PYZus{}women\PYZus{}arr}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Original length men data: (698, 150000)
+Original length women data: (944, 150000)
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}create labels for men and women data. 1 is for men, 0 is for women.}
+        \PY{n}{men\PYZus{}label} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{men\PYZus{}arr}\PY{p}{)}\PY{p}{)}
+        \PY{n}{og\PYZus{}women\PYZus{}label} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{og\PYZus{}women\PYZus{}arr}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}join the men and women clothing data together.}
+        \PY{n}{og\PYZus{}X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{men\PYZus{}arr}\PY{p}{,} \PY{n}{og\PYZus{}women\PYZus{}arr}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{og\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{men\PYZus{}label}\PY{p}{,} \PY{n}{og\PYZus{}women\PYZus{}label}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}split the data with 0.2 test size.}
+        \PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{,}\PY{n}{og\PYZus{}X\PYZus{}test}\PY{p}{,}\PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{,}\PY{n}{og\PYZus{}y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{og\PYZus{}X}\PY{p}{,} \PY{n}{og\PYZus{}y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}
+        \PY{n}{stratify} \PY{o}{=} \PY{n}{og\PYZus{}y}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original length training and testing dataset shapes:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{og\PYZus{}y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{og\PYZus{}X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{og\PYZus{}y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Number of 0}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s (women clothing) and 1}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s (men clothing) in train and test set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{collections}\PY{o}{.}\PY{n}{Counter}\PY{p}{(}\PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{collections}\PY{o}{.}\PY{n}{Counter}\PY{p}{(}\PY{n}{og\PYZus{}y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Original length training and testing dataset shapes:
+(1313, 150000) (1313,) (329, 150000) (329,)
+
+Number of 0's (women clothing) and 1's (men clothing) in train and test set:
+Train:  Counter(\{0.0: 755, 1.0: 558\})
+Test:  Counter(\{0.0: 189, 1.0: 140\})
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}balanced women array \PYZhy{} same dimensions as men array}
+        \PY{n}{women\PYZus{}arr} \PY{o}{=} \PY{n}{og\PYZus{}women\PYZus{}arr}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{men}\PY{p}{)}\PY{p}{]}
+        \PY{n}{women\PYZus{}label} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{women\PYZus{}arr}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Balanced shapes for men and women data:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{men\PYZus{}arr}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{women\PYZus{}arr}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}join the men and women clothing data together.}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{men\PYZus{}arr}\PY{p}{,} \PY{n}{women\PYZus{}arr}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{men\PYZus{}label}\PY{p}{,} \PY{n}{women\PYZus{}label}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}split the data with 0.2 test size.}
+        \PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{stratify} \PY{o}{=} \PY{n}{y}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trimmed \PYZam{} balanced length training and testing dataset shapes:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Number of 0}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s (women clothing) and 1}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s (men clothing) in train and test set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{collections}\PY{o}{.}\PY{n}{Counter}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{collections}\PY{o}{.}\PY{n}{Counter}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Balanced shapes for men and women data: (698, 150000) (698, 150000)
+Trimmed \& balanced length training and testing dataset shapes:
+(1116, 150000) (1116,) (280, 150000) (280,)
+
+Number of 0's (women clothing) and 1's (men clothing) in train and test set:
+Train:  Counter(\{0.0: 558, 1.0: 558\})
+Test:  Counter(\{0.0: 140, 1.0: 140\})
+
+    \end{Verbatim}
+
+    \section{Model Training and Evaluation}
+
+\subsection{Logistic Regression Classifier on Original 150000-dimension dataset}
+
+A comparison is made between the training results obtained from the
+LogisticRegressionCV function trained on the manually trimmed and
+balanced dataset vs the unbalanced dataset that was weighted using the
+class\_weight='balanced' option.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}applying class\PYZus{}weight=\PYZsq{}balanced\PYZsq{} on original, unbalanced dataset.}
+        \PY{n}{og\PYZus{}logr\PYZus{}mod} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{class\PYZus{}weight}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{balanced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{,}
+        \PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Using class\PYZus{}weight=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{balanced}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{ on original unbalanced dataset:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using default lbfgs solver, optimizing for}
+         \PY{n}{different} \PY{n}{Cs}\PY{o}{.}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C used for cross\PYZhy{}validation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}og\PYZus{}logr\PYZus{}mod.Cs\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C that maps to the best scores across every class:}
+         \PYZbs{}\PY{n}{n}\PY{p}{\PYZob{}}\PY{n}{og\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{C\PYZus{}}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean cross\PYZhy{}validation accuracy score: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{np.mean(og\PYZus{}logr\PYZus{}mod.scores\PYZus{}[1])\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{classification\PYZus{}report(og\PYZus{}y\PYZus{}train,}
+         \PY{n}{og\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{og\PYZus{}logr\PYZus{}mod.score(og\PYZus{}X\PYZus{}train,og\PYZus{}y\PYZus{}train)\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Using class\_weight="balanced" on original unbalanced dataset:
+Logistic Regression CV results using default lbfgs solver, optimizing for different
+Cs.
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[0.00077426]
+
+Mean cross-validation accuracy score:
+0.6660364182244373
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.91      0.91      0.91       755
+        1.0       0.88      0.87      0.88       558
+
+avg / total       0.89      0.89      0.89      1313
+
+Accuracy: 0.8941355674028941
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}Logistic regression on trimmed \PYZam{} balanced dataset, cross\PYZhy{}validating for C\PYZhy{}value.}
+         \PY{n}{logr\PYZus{}mod} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training on manually trimmed and balanced dataset:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using default lbfgs solver, optimizing for}
+         \PY{n}{different} \PY{n}{Cs}\PY{o}{.}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C used for cross\PYZhy{}validation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}logr\PYZus{}mod.Cs\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C that maps to the best scores across every class: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}logr\PYZus{}mod.C\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean cross\PYZhy{}validation accuracy score: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{np.mean(logr\PYZus{}mod.scores\PYZus{}[1])\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{classification\PYZus{}report(y\PYZus{}train,}
+         \PY{n}{logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{logr\PYZus{}mod.score(X\PYZus{}train,y\PYZus{}train)\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Training on manually trimmed and balanced dataset:
+Logistic Regression CV results using default lbfgs solver, optimizing for different
+Cs.
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[0.0001]
+
+Mean cross-validation accuracy score:
+0.6661290322580644
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.76      0.82      0.79       558
+        1.0       0.81      0.74      0.77       558
+
+avg / total       0.78      0.78      0.78      1116
+
+Accuracy: 0.782258064516129
+
+    \end{Verbatim}
+
+    \subsubsection{Choosing the original dataset}
+
+Since the original dataset with the LogisticRegressionCV's
+class\_weight='balanced' parameter provides better training results
+(0.89 accuracy vs 0.78 of the manually trimmed dataset), the same
+settings will be used for the PCA and LDA dimensionality reduction
+training procedures below.\\
+
+The test results of the LogisticRegressionCV with balanced class-weights
+on the original pixel dataset are as follows:
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}Performance of cv\PYZhy{}ed logistic regression model on test set}
+         \PY{n}{og\PYZus{}y\PYZus{}pred} \PY{o}{=} \PY{n}{og\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Logistic Regression Model Performance on Original Test Set (balanced with}
+         \PY{n}{class\PYZus{}weight}\PY{p}{)}\PYZbs{}\PY{n}{n}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy score: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{og\PYZus{}logr\PYZus{}mod.score(og\PYZus{}X\PYZus{}test,og\PYZus{}y\PYZus{}test)\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Classification report: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{classification\PYZus{}report(og\PYZus{}y\PYZus{}test, og\PYZus{}y\PYZus{}pred)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression Model Performance on Original Test Set (balanced with
+class\_weight)
+
+Accuracy score: 0.756838905775076
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.77      0.81      0.79       189
+        1.0       0.73      0.68      0.70       140
+
+avg / total       0.76      0.76      0.76       329
+
+
+    \end{Verbatim}
+
+    \subsection{PCA Dimensionality Reduction}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}Use randomized svd\PYZus{}solver to approx first N Principle Components much quicker than}
+         \PY{n}{standard} \PY{n}{PCA}
+         \PY{c+c1}{\PYZsh{}useful for high\PYZhy{}dimensional data}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components} \PY{o}{=} \PY{l+m+mi}{200}\PY{p}{,} \PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{randomized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{,} \PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{)}
+         \PY{n}{pca\PYZus{}components\PYZus{}train} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original shape:   }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{og\PYZus{}X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{transformed shape:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{pca\PYZus{}components\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+original shape:    (1313, 150000)
+transformed shape: (1313, 200)
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}plot cumulative explained variance across number of components}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of components vs Cumulative explained variance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number of components}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cumulative explained variance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} Text(0,0.5,'cumulative explained variance')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment-3-machine-learning-fashionista_files/assignment-3-machine-learning-fashionista_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Since 200 components provides about 90\% of the explained variance, we
+will accept the trained PCA model of 200 components.
+\newpage
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}compare input images with images reconstructed from 200 components}
+         \PY{n}{pca\PYZus{}projected} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{pca\PYZus{}components\PYZus{}train}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the results}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}
+                                \PY{n}{subplot\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,}
+                                \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{pca\PYZus{}projected}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZhy{}dim}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{200\PYZhy{}dim}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{reconstruction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} Text(0,0.5,'200-dim\textbackslash{}nreconstruction')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment-3-machine-learning-fashionista_files/assignment-3-machine-learning-fashionista_21_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{}Cross\PYZhy{}validation to find best C\PYZhy{}value for logistic regression classifier}
+         \PY{n}{pca\PYZus{}logr\PYZus{}mod} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}
+         \PY{n}{class\PYZus{}weight}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{balanced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{pca\PYZus{}components\PYZus{}train}\PY{p}{,}\PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using default of lbfgs solver, optimizing for}
+         \PY{n}{different} \PY{n}{Cs}\PY{o}{.}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C used for cross\PYZhy{}validation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}pca\PYZus{}logr\PYZus{}mod.Cs\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C that maps to the best scores across every class:}
+         \PYZbs{}\PY{n}{n}\PY{p}{\PYZob{}}\PY{n}{pca\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{C\PYZus{}}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean cross\PYZhy{}validation accuracy score: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{np.mean(pca\PYZus{}logr\PYZus{}mod.scores\PYZus{}[1])\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{classification\PYZus{}report(og\PYZus{}y\PYZus{}train,}
+         \PY{n}{pca\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pca\PYZus{}components\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{pca\PYZus{}logr\PYZus{}mod.score(pca\PYZus{}components\PYZus{}train,og\PYZus{}y\PYZus{}train)\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression CV results using default of lbfgs solver, optimizing for different
+Cs.
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[0.00077426]
+
+Mean cross-validation accuracy score:
+0.647229275292659
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.79      0.79      0.79       755
+        1.0       0.71      0.72      0.71       558
+
+avg / total       0.76      0.76      0.76      1313
+
+Accuracy: 0.7570449352627571
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{}Performance of cv\PYZhy{}ed logistic regression model on test set}
+         \PY{n}{pca\PYZus{}components\PYZus{}test} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{pca\PYZus{}y\PYZus{}pred} \PY{o}{=} \PY{n}{pca\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{pca\PYZus{}components\PYZus{}test}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Logistic Regression Model Performance on PCA Reduced\PYZhy{}Dimensionality}
+         \PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)} \PY{n}{Set}\PYZbs{}\PY{n}{n}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy score: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{pca\PYZus{}logr\PYZus{}mod.score(pca\PYZus{}components\PYZus{}test,og\PYZus{}y\PYZus{}test)\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Classification report: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{classification\PYZus{}report(og\PYZus{}y\PYZus{}test, pca\PYZus{}y\PYZus{}pred)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression Model Performance on PCA Reduced-Dimensionality (n\_components=200)
+Set
+
+Accuracy score: 0.756838905775076
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.78      0.80      0.79       189
+        1.0       0.72      0.70      0.71       140
+
+avg / total       0.76      0.76      0.76       329
+
+
+    \end{Verbatim}
+\newpage
+    \subsection{LDA Dimensionality Reduction}
+
+Since there are only 2 classes, i.e. men's clothing and women's
+clothing, the number of components has to be 1 since sklearn's LDA
+function can only produce at most k - 1 components (where k is the
+number of classes).
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{lda} \PY{o}{=} \PY{n}{LDA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{,} \PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{)}
+         \PY{n}{lda\PYZus{}X\PYZus{}train} \PY{o}{=} \PY{n}{lda}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}train}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{original shape:   }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{og\PYZus{}X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{transformed shape:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lda\PYZus{}X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+/anaconda3/lib/python3.6/site-packages/sklearn/discriminant\_analysis.py:388:
+UserWarning: Variables are collinear.
+  warnings.warn("Variables are collinear.")
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+original shape:    (1313, 150000)
+transformed shape: (1313, 1)
+
+    \end{Verbatim}
+
+    The "Variables are collinear" warning indicates that the estimated
+coefficients from the LDA transformation could be collinear. However,
+since we are more concerned on the classification performance of the LDA
+rather than the interpretability of the estimated coefficients, the
+warning will be ignored for now.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}explained variance ratio for lda is 1 since there\PYZsq{}s only 1 component}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{lda}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+[1.]
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{}Cross\PYZhy{}validation to find best C\PYZhy{}value for logistic regression classifier}
+         \PY{n}{lda\PYZus{}logr\PYZus{}mod} \PY{o}{=} \PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{n}{Cs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}
+         \PY{n}{class\PYZus{}weight}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{balanced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lda\PYZus{}X\PYZus{}train}\PY{p}{,}\PY{n}{og\PYZus{}y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression CV results using default of lbfgs solver, optimizing for}
+         \PY{n}{different} \PY{n}{Cs}\PY{o}{.}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C used for cross\PYZhy{}validation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+si}{\PYZob{}lda\PYZus{}logr\PYZus{}mod.Cs\PYZus{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Array of C that maps to the best scores across every class:}
+         \PYZbs{}\PY{n}{n}\PY{p}{\PYZob{}}\PY{n}{lda\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{C\PYZus{}}\PY{p}{\PYZcb{}}\PYZbs{}\PY{n}{n}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean accuracy score: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{np.mean(lda\PYZus{}logr\PYZus{}mod.scores\PYZus{}[1])\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classification report:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{classification\PYZus{}report(og\PYZus{}y\PYZus{}train,}
+         \PY{n}{lda\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{lda\PYZus{}X\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{lda\PYZus{}logr\PYZus{}mod.score(lda\PYZus{}X\PYZus{}train,og\PYZus{}y\PYZus{}train)\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression CV results using default of lbfgs solver, optimizing for different
+Cs.
+
+Array of C used for cross-validation:
+[1.00000000e-04 7.74263683e-04 5.99484250e-03 4.64158883e-02
+ 3.59381366e-01 2.78255940e+00 2.15443469e+01 1.66810054e+02
+ 1.29154967e+03 1.00000000e+04]
+
+Array of C that maps to the best scores across every class:
+[0.00599484]
+
+Mean accuracy score:
+0.916383324799989
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.93      0.92      0.93       755
+        1.0       0.89      0.91      0.90       558
+
+avg / total       0.92      0.92      0.92      1313
+
+Accuracy: 0.916984006092917
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{}Performance of cv\PYZhy{}ed logistic regression model on test set}
+         \PY{n}{lda\PYZus{}X\PYZus{}test} \PY{o}{=} \PY{n}{lda}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{og\PYZus{}X\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{lda\PYZus{}y\PYZus{}pred} \PY{o}{=} \PY{n}{lda\PYZus{}logr\PYZus{}mod}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{lda\PYZus{}X\PYZus{}test}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Logistic Regression Model Performance on LDA Reduced\PYZhy{}Dimensionality}
+         \PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{n}{Set}\PYZbs{}\PY{n}{n}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy score: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{lda\PYZus{}logr\PYZus{}mod.score(lda\PYZus{}X\PYZus{}test,og\PYZus{}y\PYZus{}test)\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Classification report: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{classification\PYZus{}report(og\PYZus{}y\PYZus{}test, lda\PYZus{}y\PYZus{}pred)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Logistic Regression Model Performance on LDA Reduced-Dimensionality (n\_components=1)
+Set
+
+Accuracy score: 0.7051671732522796
+
+Classification report:
+             precision    recall  f1-score   support
+
+        0.0       0.74      0.75      0.74       189
+        1.0       0.65      0.65      0.65       140
+
+avg / total       0.70      0.71      0.71       329
+
+
+    \end{Verbatim}
+\newpage
+    \section{Summary}
+
+\subsection{Results}
+
+The original dataset shapes of ( 698, 150000 ) for men and ( 944, 150000
+) for women were split into a train-test ratio of 0.8/0.2. In comparing
+the performance of a logistic regression classifier without balanced
+class weights on a manually trimmed and balanced dataset, vs a logistic
+regression classifier with balanced class weights on the original
+unbalanced dataset, the latter had a better training performance
+(accuracy of 0.89 vs 0.78 of the manually balanced dataset), and so I
+chose to use the original dataset for the PCA and LDA logistic
+regression methods as well, while setting class\_weights='balanced' for
+both.\\
+
+The LogisticRegressionCV function has inbuilt C-value cross-validation
+capabilities.\\
+
+Three different logistic regression models were trained and tested on
+either the original pixel dataset, the PCA dataset, or the LDA dataset.\footnote{\textbf{\#regression: }I trained and tested different logistic regression models to investigate the dataset that provides the best performance: original dimensions, PCA transformed, or LDA transformed. To deal with the imbalance in ratio of the two classes (men and women's clothing), I set the class\_weight parameter in the LogisticRegressionCV function to 'balanced', and this gave me better results than a manual sorting - probably because I have more data points to work with. The LogisticRegressionCV function was used vs the original LogisticRegression function since the CV function also uses cross-validation to optimize for the C-value.}
+The training and testing results are shown below (the precision and
+recall details can be seen above, but will be omited in this summary
+since the main point is to compare the general performance of the
+various models):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  \textbf{The original pixel dataset (150000 dimensions)}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Training accuracy: 0.89
+\item
+  Testing accuracy: 0.76
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+   \textbf{The PCA dataset (200 dimensions)}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Training accuracy: 0.76
+\item
+  Testing accuracy: 0.76
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{ The LDA dataset (1 dimension)}
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Training accuracy: 0.92
+\item
+  Testing accuracy: 0.71
+\end{itemize}
+
+\subsection{Interpretation of Results}
+
+The results above reveal that while the models trained on the original
+dataset and LDA dataset have higher training accuracy scores, the LDA
+dataset model has a lower testing accuracy than the PCA dataset model
+(0.71 vs 0.76), while the original pixel dataset has the same testing
+accuracy (0.76).\\
+
+The higher training scores for both the original and LDA dataset models
+could be a result of overfitting. In the case of the original pixel
+dataset, the large amount of features (150000) could be generating a lot
+of unneccesary noise that interferes with the model's classification
+performance on the testing set. The LDA dataset has a reduced dimension
+of 1 component, and its model may be underperforming on the test set due
+to a lack of differentiability between the two classes when only 1
+linear discriminant is derived.\\
+
+The model trained on the PCA dataset has a roughly equivalent training
+and testing score; this suggests that the model does a better job at
+classifying new and unseen data. While one would typically expect the
+LDA to have a higher performance since the LDA reduction is a supervised
+method that prioritizes class separability, perhaps the LDA is
+underperforming due to the extreme reduced dimensionality of 1, which
+may not be sufficient to account for the differences between the men and
+women clothing class.\\
+
+Efficiency-wise, the original dataset model takes the longest to run -
+at least a few minutes (not more than 10) - vs the
+reduced-dimensionality models, which only take a few seconds to run on
+both the training and testing set. This makes sense since the original
+dataset has 150000 dimensions vs 200-D for the PCA dataset and 1-D for
+the LDA dataset. The PCA and LDA models do require an additional
+preprocessing step of transforming the data to its
+reduced-dimensionality version beforehand, which takes a few minutes
+(not more than 5).\\
+
+When one considers the process of rigorous cross-validation, the PCA and
+LDA dataset models are much more efficient since the transformation step
+only has to be performed once on the entire dataset, after which the
+cross-validation process can be conducted quickly and efficiently on the
+transformed data; whereas for the original dataset, the cross-validation
+would take much longer since every parameter-adjustment would result in
+training the model on a 150000 feature dataset again.
+
+\subsection{Recommendation}
+
+Considering the training and test results, and the efficiency of the
+various methods, I would recommend using the PCA dataset model. Although
+it has a similar testing accuracy as the original dataset model, the
+dataset is more compact (200-D vs 150000-D) and so any cross-validation,
+training, and testing processes would be much more efficient.
+Furthermore, the similar performance between the training and testing
+set shows that the PCA model has a more reliable performance on new and
+unseen data vs the original dataset model.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

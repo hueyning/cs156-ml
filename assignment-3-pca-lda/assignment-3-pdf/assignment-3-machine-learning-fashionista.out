@@ -1,0 +1,12 @@
+\BOOKMARK [1][-]{section.1}{Cleaning and Processing Data}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Manual Cleaning of Data}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Resizing, Reshaping and Balancing}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Model Training and Evaluation}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Logistic Regression Classifier on Original 150000-dimension dataset}{section.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Choosing the original dataset}{subsection.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.2}{PCA Dimensionality Reduction}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{LDA Dimensionality Reduction}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Summary}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Results}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Interpretation of Results}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Recommendation}{section.3}% 12
