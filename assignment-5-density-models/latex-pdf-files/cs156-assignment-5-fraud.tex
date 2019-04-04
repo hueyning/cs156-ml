@@ -1,0 +1,1207 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CS156: Creating Fake Transaction Data using Kernel Density Estimation Models}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    \section*{Fraud: A How-to Guide}
+
+Many cases of fraud can be detected through outlier detection or other
+statistical analysis. A fairly well-known example is Benford's law:
+\url{http://mathworld.wolfram.com/BenfordsLaw.html}. This states that
+transactions amounts span several orders of magnitude and are best
+modeled in log-space. However when converted back into normal amounts,
+roughly 30\% of the transactions will have an initial digit of ``1'',
+and 17\% will have an initial digit of ``2'' etc. This is very different
+from most people's intuition that each digit should have an equal
+probability of occurring.\\
+
+In this problem, I will use density modeling to try and ensure that
+there are no statistical irregularities in self-generated data.
+
+\subsection*{Instructions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Download the following data containing personal transactions over a
+  period of several years:
+  https://course-resources.minerva.kgi.edu/uploaded\_files/mke/Y5GZpr/anonymized.csv
+\item
+  Now build the following density models for:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The number of transactions that occur in a single month.
+  \item
+    The day in the month that a transaction will occur on.
+  \item
+    Transaction size.
+  \end{itemize}
+\item
+  Create plots showing the distributions that you've created.
+\item
+  Sampling from these density models, create a fictitious month of
+  personal transactions.
+\item
+  Explain what flaws still remain in your model that a forensic
+  accountant might be able to find and determine that this was a
+  fraudulent set of transactions.
+\item
+  (Optional) How well does the data follow Benford's law?
+\end{enumerate}
+\newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors}\PY{n+nn}{.}\PY{n+nn}{kde} \PY{k}{import} \PY{n}{KernelDensity}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{dates} \PY{k}{as} \PY{n+nn}{dates}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \section{Number of Transactions}
+
+Density models of the number of transactions are constructed at two
+different levels of granularity:
+
+\begin{itemize}
+\tightlist
+\item
+  The number of transactions in a month
+\item
+  The number of transactions in a day
+\end{itemize}
+
+The bandwidth of the density models in this section and the rest are all
+manually chosen based on visual comparison between the resulting KDE
+plot and the original data's plot.
+
+\subsection{Number of Monthly Transactions}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}import data}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{transactions.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}peak at data}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}convert date from string to datetime}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{infer\PYZus{}datetime\PYZus{}format}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}create month\PYZhy{}year column to get monthly time periods}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{Date}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{to\PYZus{}period}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}group transactions based on month and year}
+        \PY{n}{monthly\PYZus{}trans} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}barplot of monthly transactions}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{monthly\PYZus{}trans}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Monthly Transactions from 2013\PYZhy{}09 to 2017\PYZhy{}09}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+        Date    Amount
+0  25May2016  54241.35
+1  29May2017  54008.83
+2  30Jun2017  54008.82
+3  05Jan2017  52704.37
+4  23Feb2017  52704.36
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} Text(0,0.5,'Number of transactions')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_3_2.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{month}
+        \PY{n}{monthly\PYZus{}trans\PYZus{}grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}plot daily transactions}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{monthly\PYZus{}trans\PYZus{}grouped}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions on Each Specific Month (Grouped across Years)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} Text(0,0.5,'Number of Transactions')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_4_1.png}
+    \end{center}
+    
+    \newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{kde}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+        
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    This function makes a side\PYZhy{}by\PYZhy{}side plot comparing the histogram and density}
+        \PY{l+s+sd}{    for the original data vs histogram and density for the KDE samples.}
+        
+        \PY{l+s+sd}{    Input:}
+        \PY{l+s+sd}{        data (arr): The data for plotting the original data histogram.}
+        
+        \PY{l+s+sd}{        kde (sklearn.neighbors.kde.KernelDensity): The kde created after fitting a}
+        \PY{l+s+sd}{kernel to the data.}
+        
+        \PY{l+s+sd}{        title (string): The title of the resulting plot.}
+        
+        \PY{l+s+sd}{    Output:}
+        \PY{l+s+sd}{        Does not return any output, but displays two plots showing:}
+        \PY{l+s+sd}{        \PYZhy{} The distribution of the original data.}
+        \PY{l+s+sd}{        \PYZhy{} The distribution of the KDE\PYZhy{}generated samples.}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+        
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}plot hist and density for original data}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{legend}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}3a6ab7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of original data: }\PY{l+s+si}{\PYZob{}title\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{(\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mu\PYZdl{} =}
+        \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{err}{\PYZdl{}}\PYZbs{}\PY{n}{sigma}\PY{err}{\PYZdl{}} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, size=13)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Density}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}title\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{}plot hist and density for 1000 samples from gaussian kernel}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{samples} \PY{o}{=} \PY{n}{kde}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+            \PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{(}\PY{n}{samples}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}d85849}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{samples}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}d85849}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of KDE samples }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{(\PYZdl{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{mu\PYZdl{} = }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(np.mean(samples),2)\PYZcb{},}
+        \PY{err}{\PYZdl{}}\PYZbs{}\PY{n}{sigma}\PY{err}{\PYZdl{}} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n+nb}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{samples}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, size=13)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Density}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}title\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}monthly transactions histogram: original and kde}
+        \PY{n}{data} \PY{o}{=} \PY{n}{monthly\PYZus{}trans}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{monthly\PYZus{}trans\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{monthly\PYZus{}trans\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Monthly Transactions}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_6_0.png}
+    \end{center}
+    
+    \section{Number of Daily Transactions}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}group transactions by exact date}
+        \PY{n}{daily\PYZus{}trans} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}plot daily transactions}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{daily\PYZus{}trans}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}ticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Daily Transactions from 2013\PYZhy{}09 to 2017\PYZhy{}09}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Text(0,0.5,'Number of Transactions')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_8_1.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{day}
+        \PY{n}{daily\PYZus{}trans\PYZus{}grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}plot daily transactions}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{daily\PYZus{}trans\PYZus{}grouped}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions on Each Specific Day of the Month (Grouped across}
+        \PY{n}{Years}\PY{p}{)}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{, fontsize=20)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day of the Month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} Text(0,0.5,'Number of Transactions')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_9_1.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}daily transactions histogram: original and kde}
+        \PY{n}{data} \PY{o}{=} \PY{n}{daily\PYZus{}trans}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{daily\PYZus{}trans\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{daily\PYZus{}trans\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Daily Transactions}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_10_0.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}get histogram and KDE of specific days to see whether there is a significant difference}
+        \PY{k}{def} \PY{n+nf}{day\PYZus{}data\PYZus{}kde}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{day}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}day specific number of transactions \PYZhy{} grouped across 2013 \PYZhy{} 2017}
+            \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{day}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{data}\PY{p}{,} \PY{n}{kde}
+        
+        \PY{n}{day\PYZus{}16} \PY{o}{=} \PY{n}{day\PYZus{}data\PYZus{}kde}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{)}
+        \PY{n}{day\PYZus{}25} \PY{o}{=} \PY{n}{day\PYZus{}data\PYZus{}kde}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{)}
+        
+        \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{day\PYZus{}16}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{day\PYZus{}16}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions on the 16th}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+        \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{day\PYZus{}25}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{day\PYZus{}25}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Transactions on the 25th}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_11_0.png}
+    \end{center}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_11_1.png}
+    \end{center}
+    
+    \subsection{Analysis}
+
+\subsubsection{Number of Monthly Transactions}
+
+From the "Number of Monthly Transactions" plot, we see a somewhat cyclic
+trend where the number of transactions peaks around December 2014 and
+January 2015, as well as December 2016 and January 2017 (note that
+December 2015 and January 2016 did not experience a peak). That being
+said, there is not enough data to ascertain whether the trend is
+reliable, e.g. whether there is a consistent cycle that peaks every 2
+years around December and January. There is also an underlying upwards
+trend in transactions from 2013 to 2017, i.e. as the years increase, the
+overall number of transactions is also increasing.\\
+
+When the number of monthly transactions are grouped across years, we see
+that December has the highest number of transactions
+(\textasciitilde{}250) while November has the lowest
+(\textasciitilde{}175). There isn't a very significant difference
+between the highest-transaction month and the lowest-transaction month.
+The monthly transactions KDE is shaped like a normal distribution with a
+mean of \textasciitilde{}50.
+
+\subsubsection{Number of Daily Transactions}
+
+The "Number of Daily Transactions" plot is rather hard to analyze due to
+the sheer number of individual dates, so the number of transactions on
+each specific day of the month are grouped together across the years and
+analyzed instead. The grouped plot shows that 25th appears to have the
+highest number of transactions (\textasciitilde{}140), while 16th
+appears to have the lowest (\textasciitilde{}55). Considering the fact
+that about half the months in a year do not have the 31st, yet 16th
+still has the lowest number of transactions, it may be worth it to
+create day-specific KDEs for each day in the dataset (or at least, the
+extreme value days).\\
+
+I experimented with creating day-specific KDEs to sample the number of
+transactions in a way that was accurate to the historical trend of that
+specific day of the month. However, when I created day-specific KDEs
+(for the 16th and 25th), I found that the distributions looked largely
+similar, and there was only a small difference in means (2.31 vs 4.1).
+In comparison, the mean for the daily transaction KDE across all
+different days is 2.74, albeit with a right-skew. As such, I have
+decided to simply use the non-specific daily transaction KDE for
+sampling the number of transactions that occur per day when constructing
+the fake data.
+
+\subsubsection{Summary}
+
+In creating the fake data, I have decided to use the daily transaction
+KDE since it will provide more granular accuracy vs the monthly
+transaction KDE. That is, I will be able to assign the exact number of
+transactions per day, as opposed to only obtaining the number of
+transactions at the monthly level and having to decide how to distribute
+the transactions across the days.\\
+
+The monthly transactions KDE will be used later on to test that the sum
+of transaction counts across the fake days falls within a reasonable
+range of the monthly KDE sampling distribution.\\
+
+The negligence of time-dependent trends in the fake data may arouse some
+suspicion, especially if the fraud is carried out over a long-term
+period, e.g. several months or years. However, since I will only be
+generating fake data for one month, I believe that the daily transaction
+KDE should suffice in assigning reasonably convincing number of
+transactions per day of fake data.
+
+\newpage
+    \section{The Day in a Month that a Transaction Occured on}
+
+In comparison to the KDEs above, this KDE will map the number of times a
+transaction did or did not occur on a certain date.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{first\PYZus{}date} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{last\PYZus{}date} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First date in dataset: }\PY{l+s+si}{\PYZob{}first\PYZus{}date\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Last date in dataset: }\PY{l+s+si}{\PYZob{}last\PYZus{}date\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}get difference between two dates}
+         \PY{n}{time\PYZus{}delta} \PY{o}{=} \PY{n}{last\PYZus{}date} \PY{o}{\PYZhy{}} \PY{n}{first\PYZus{}date}
+         
+         \PY{c+c1}{\PYZsh{}create datelist with all days between the first and last date}
+         \PY{n}{datelist} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{n}{first\PYZus{}date}\PY{p}{,} \PY{n}{periods}\PY{o}{=}\PY{n}{time\PYZus{}delta}\PY{o}{.}\PY{n}{days}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}find days where a transaction occured}
+         \PY{n}{transaction\PYZus{}dates} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{datelist}\PY{p}{)} \PY{o}{\PYZam{}} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}if transaction occured, note down \PYZsq{}1\PYZsq{} for transaction, else \PYZsq{}0\PYZsq{}}
+         \PY{n}{trans\PYZus{}occurence\PYZus{}lst} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{date} \PY{o+ow}{in} \PY{n}{transaction\PYZus{}dates} \PY{k}{else} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{date} \PY{o+ow}{in} \PY{n}{datelist}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}create dataframe of transaction occurences}
+         \PY{n}{trans\PYZus{}occurence\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{datelist}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transaction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{trans\PYZus{}occurence\PYZus{}lst}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}plot the number of days a transaction occured vs no transaction occured}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{trans\PYZus{}occurence\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transaction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of days a transaction occured (1) vs no transaction occured (0)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}group the transaction occurence data by days}
+         \PY{n}{trans\PYZus{}occurence\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{trans\PYZus{}occurence\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{day}
+         \PY{n}{trans\PYZus{}occurence\PYZus{}count} \PY{o}{=} \PY{n}{trans\PYZus{}occurence\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plot number of times at least one transaction occured across days}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{trans\PYZus{}occurence\PYZus{}count}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transaction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Times At Least One Transaction Occured Across Days}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Times At Least}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ One Transaction Occured}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+First date in dataset: 2013-09-20 00:00:00
+Last date in dataset: 2017-09-28 00:00:00
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_14_1.png}
+    \end{center}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} Text(0,0.5,'Number of Times At Least\textbackslash{}n One Transaction Occured')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_14_3.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}transaction occurence probability: original and kde}
+         \PY{n}{data} \PY{o}{=} \PY{n}{trans\PYZus{}occurence\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Transaction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{trans\PYZus{}occurence\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{trans\PYZus{}occurence\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Probability of Transaction Occuring}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_15_0.png}
+    \end{center}
+    
+    \subsection{Analysis}
+
+From the barplot showing the number of times at least one transaction
+occured across days, we see that excluding the 31st (since half the
+months in a year do not have the 31st), the 16th has the lowest amount
+of transaction occurences (\textasciitilde{}25), which also explains why
+the 16th has the lowest number of transactions a day. This also explains
+the similarity in mean between the 16th-specific KDE vs 25th-specific
+KDE shown earlier - on days where there \emph{are} transactions, the
+16th has a reasonable amount of transactions, however, there are just
+\emph{less days where a transaction occured} overall.\\
+
+The 22nd has the highest amount of transaction occurences
+(\textasciitilde{}40), which means that a transaction should almost
+always occur on the 22nd.\\
+
+Since a visual analysis of the barplot does not show significant
+difference between the transaction occurences between days, the
+"Probability of Transaction Occuring" KDE will be used to decide the
+probability of a transaction occuring on a given day when creating the
+fake data.\\
+
+Once again, while a long-con may cause suspicion if the fake data does
+not line-up with the time components of the real data, e.g. transactions
+occuring more often on the 22nd and less often on the 16th, the creation
+of only a month's worth of fake data according to the generated KDE
+should produce convincing absences and occurences of transaction days
+within the month.
+\newpage
+    \section{Transaction Size}
+
+Density models at three different levels of granularity are constructed:
+
+\begin{itemize}
+\tightlist
+\item
+  The monthly transaction size
+\item
+  The daily transaction size
+\item
+  The transaction size per transaction
+\end{itemize}
+
+\subsection{Monthly Transaction Size}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{monthly\PYZus{}size} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plot mean of monthly transaction size}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{monthly\PYZus{}size}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Monthly Transaction Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Transaction Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} Text(0,0.5,'Transaction Size')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_18_1.png}
+    \end{center}
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}monthly size histogram: original and kde}
+         \PY{n}{data} \PY{o}{=} \PY{n}{monthly\PYZus{}size}
+         \PY{n}{monthly\PYZus{}size\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{monthly\PYZus{}size\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Monthly Transaction Size}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_19_0.png}
+    \end{center}
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}remove outlier of December 2014 and view difference in KDE}
+         \PY{n}{monthly\PYZus{}size\PYZus{}no\PYZus{}outlier} \PY{o}{=} \PY{n}{monthly\PYZus{}size}\PY{p}{[}\PY{n}{monthly\PYZus{}size}\PY{o}{.}\PY{n}{index} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2014\PYZhy{}12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}monthly size with no outlier histogram: original and kde}
+         \PY{n}{data} \PY{o}{=} \PY{n}{monthly\PYZus{}size\PYZus{}no\PYZus{}outlier}
+         \PY{n}{monthly\PYZus{}size\PYZus{}no\PYZus{}outlier\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{2.0}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{monthly\PYZus{}size\PYZus{}no\PYZus{}outlier\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Monthly Transaction Size}
+         \PY{p}{(}\PY{n}{outlier} \PY{n}{removed}\PY{p}{)}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ )}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_20_0.png}
+    \end{center}
+
+    \newpage
+    \subsection{Daily Transaction Size}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{daily\PYZus{}size} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plot daily transaction size}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{daily\PYZus{}size}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}ticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Daily Transaction Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Transaction Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Text(0,0.5,'Transaction Size')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_22_1.png}
+    \end{center}
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}daily size histogram: original and kde}
+         \PY{n}{data} \PY{o}{=} \PY{n}{daily\PYZus{}size}
+         \PY{n}{daily\PYZus{}size\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{2.0}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{daily\PYZus{}size\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Daily Transaction Size}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_23_0.png}
+    \end{center}
+
+        \newpage
+    \subsection{Transaction Size per Transaction}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{transaction\PYZus{}size} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}plot daily transaction size}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{transaction\PYZus{}size}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}ticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Transaction Size per Transaction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Transaction Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} Text(0,0.5,'Transaction Size')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_25_1.png}
+    \end{center}
+
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}transaction size (per transaction) histogram: original and kde}
+         \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{transaction\PYZus{}size\PYZus{}kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{3.0}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plot\PYZus{}density\PYZus{}models}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{transaction\PYZus{}size\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Transaction Size (per transaction)}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_26_0.png}
+    \end{center}
+
+    \newpage
+   \subsection{Analysis}
+
+The monthly, daily, and "per transaction" transaction sizes show extreme
+variance, with standard deviations of \textasciitilde{}37000,
+\textasciitilde{}11000, and \textasciitilde{}7000 repsectively. This is
+further emphasized by the fact that the monthly transaction size
+histogram has a mean of 0, while the KDE samples have a mean of 286.
+Similarly, the daily transaction size histogram has a mean of 0, while
+the KDE samples have a mean of -164; and the transaction size per
+transaction histogram has a mean of 0, while the KDE samples have a mean
+of -216.
+
+\subsubsection{Monthly Transaction Size - Removing the Outlier}
+
+The monthly transaction size time-series plot reveals an extreme dip on
+December 2014 that may be skewing the rest of the data. The histogram
+also reveals the same outlier data point on the far left of the plot.
+While we may expect monthly transaction sizes to differ between months,
+an extreme deviation is irregular and unexpected - as such, the outlier
+is removed and the resulting histogram and KDE re-analyzed. The new KDE
+has a much more stable performance - with a mean of
+\textasciitilde{}4600 vs the original data mean of \textasciitilde{}3600
+(both without outliers). The standard deviation is also lowered to
+\textasciitilde{}28000.
+
+\subsubsection{Daily Transaction Size}
+
+The daily transaction size time-series plot reveals increasing
+transaction sizes in the more recent years (both in income and
+expenses). One can almost see that the transaction size on both the
+positive and negative y-axes have greater magnitudes as the years
+progress. Since there appear to be a few extreme sizes (vs only one in
+the monthly transaction size), the extreme values are retained in
+generating the KDE. This choice is supported by the fact that the
+irregularity of the daily transactions appears to be prominent within
+the original data as well.
+
+\subsubsection{Transaction Size per Transaction}
+
+The transaction size per transaction time-series plot has a relatively
+similar pattern to the daily transaction size time-series plot. Once
+again, the extreme values are retained since there isn't any especially
+egregrious value that appears to be an outlier. The standard deviation
+of the KDE is \textasciitilde{}7000, which shows a more stable
+performance vs the daily transaction size KDE.
+
+\subsubsection{Summary}
+
+In generating the fake data, the "Transaction Size per Transaction" KDE
+will be used to draw the transaction size since it has a smaller
+standard deviation than the daily size KDE, while also offering more
+granularity. The monthly transaction size KDE will be used to check that
+the sum of the transaction size samples across the fictitious month do
+not exceed realistic boundaries of the monthly transaction size.
+\newpage
+    \section{Create Fictitious Month of Transactions}
+
+The fictitious month of transactions will be created as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Sample 30 times from the "Probability of Transaction Occuring" KDE to
+  get an array of 30 days in which transactions may or may not have
+  occured.
+\item
+  For each day that a transaction occured, sample from the "Number of
+  Daily Transactions" KDE to get the number of transactions that occured
+  on that day.
+\item
+  For each transaction, sample from the "Transaction size per
+  Transaction" KDE to get the size of that transaction.
+\item
+  Check that the sum of transactions across the entire fictitious month
+  does not exceed the 90\% confidence interval of the "Monthly
+  Transaction Size" KDE samples. If the sum of transactions exceeds the
+  90\% confidence interval, repeat step 1, 2, and 3 to get a different
+  set of results.
+\end{enumerate}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}fake\PYZus{}month}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Returns a pandas dataframe of a month\PYZsq{}s worth (30 days) of fake transactions.}
+         \PY{l+s+sd}{    Columns:}
+         \PY{l+s+sd}{        Day: The day in which the transaction takes place}
+         \PY{l+s+sd}{        Amount: The transaction amount}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{c+c1}{\PYZsh{}get arr of 1 and 0 to determine when a transaction occured}
+             \PY{n}{trans\PYZus{}occured} \PY{o}{=} \PY{n}{trans\PYZus{}occurence\PYZus{}kde}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}get number of transactions that occured each day}
+             \PY{n}{num\PYZus{}of\PYZus{}trans} \PY{o}{=} \PY{n}{daily\PYZus{}trans\PYZus{}kde}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}initialize fake month dictionary}
+             \PY{n}{fake\PYZus{}month} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+             \PY{c+c1}{\PYZsh{}for each day in the fake month}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trans\PYZus{}occured}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{}if a transaction occured on that day}
+                 \PY{k}{if} \PY{n}{trans\PYZus{}occured}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+         
+                     \PY{c+c1}{\PYZsh{}get transaction amount for each transaction that occured on that day}
+                     \PY{n}{transaction\PYZus{}amount} \PY{o}{=}
+         \PY{n}{transaction\PYZus{}size\PYZus{}kde}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{num\PYZus{}of\PYZus{}trans}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{}assign the array of transaction amounts to the corresponding day}
+                     \PY{n}{fake\PYZus{}month}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{transaction\PYZus{}amount}
+         
+             \PY{c+c1}{\PYZsh{}process fake\PYZus{}month dictionary to create fake\PYZus{}days and fake\PYZus{}transactions in}
+         \PY{n}{dataframe} \PY{n+nb}{format}
+             \PY{n}{fake\PYZus{}days} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{fake\PYZus{}transaction} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{k}{for} \PY{n}{k}\PY{p}{,}\PY{n}{v} \PY{o+ow}{in} \PY{n}{fake\PYZus{}month}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{fake\PYZus{}days}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{k}\PY{p}{)}
+                     \PY{n}{fake\PYZus{}transaction}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{fake\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{fake\PYZus{}days}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amount}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{fake\PYZus{}transaction}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{fake\PYZus{}df}
+         
+         \PY{n}{fake\PYZus{}df} \PY{o}{=} \PY{n}{create\PYZus{}fake\PYZus{}month}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fake\PYZus{}df}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}     Day    Amount
+         0     1 -14004.44
+         1     1   -191.07
+         2     1  -2107.14
+         3     1    -63.59
+         4     1    -18.73
+         5     4   -703.25
+         6     4   -695.28
+         7     4  45884.37
+         8     4    -33.83
+         9     4  -1499.63
+         10    6   -503.13
+         11    6    -70.48
+         12    6   -184.46
+         13    6  -3215.78
+         14    7    253.04
+         15   12   -252.63
+         16   12   -697.13
+         17   12   -620.45
+         18   12   -108.02
+         19   13   -406.95
+         20   13   -223.20
+         21   13  -3471.62
+         22   14   -180.69
+         23   16   -497.27
+         24   18 -13463.69
+         25   18  -1284.92
+         26   19 -17872.32
+         27   20    -36.26
+         28   20  -5304.17
+         29   21   -493.21
+         30   22     10.34
+         31   23   -402.77
+         32   24   -714.60
+         33   25    -66.58
+         34   25   -318.47
+         35   26    -55.21
+         36   26   -444.75
+         37   26    -60.58
+         38   27   9652.89
+         39   28  -3708.21
+         40   28  17685.36
+         41   28   -174.47
+         42   28    -56.02
+         43   29    -63.01
+         44   30    114.38
+         45   30   -393.40
+         46   30    -46.68
+\end{Verbatim}
+            
+    \subsection{Compare Data to Monthly-level KDE Samples}
+
+This step is meant to demonstrate that the fake data generated from the
+daily samples can align with the monthly samples. It can also be used as
+a final-check when creating the fake monthly data to avoid producing an
+egregrious dataset that fits the daily criteria but does not fit the
+monthly criteria.\\
+
+Instead of comparing the data with the KDE samples, the fake data could
+also simply be compared with the real data as a final step. In this
+case, I've just used the KDE samples to show the cohesion between the
+KDEs of differing levels of granularity.\\
+
+While my result here shows good alignment with the monthly level
+samples, i.e. we get a highly-expected fake data value that is close to
+the monthly mean, it should be noted that it is very possible to get
+data that falls outside the 90\% CI as well (this happened to me a few
+times). In such a case, the create\_fake\_month() function should be run
+again until a dataset that satisfies the monthly comparison is created.\footnote{\textbf{\#significance: } I set a 90\% Confidence Interval for the monthly-level KDE samples and tested whether the daily-level generated samples would fall within the 90\% CI of the monthly samples. This is used as a final test to ensure that if a forensic consultant were to conduct a t-test (though I'm sure they would use much more sophisticated methods), they would not see that my data is "statistically significant" - statistical significance here being anything that falls outside the 90\% CI zone (a number which I rather arbitrarily picked - I just reasoned that 95\% was too lenient, but there was enough randomness within the transaction data that a CI that was too narrow would not be suitable either). While I did not conduct the test comparing the fake data with the real data, this would also be good check to perform before releasing the fake data into the world. Visually, we can see that my fake data has a good p-value to be considered "statistically insignificant". I actually performed several runs and chose the one that fell within the CI as an appropriate fake dataset that I would feel safe using if I was really conducting fraud.}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{compare\PYZus{}data}\PY{p}{(}\PY{n}{fake\PYZus{}data}\PY{p}{,} \PY{n}{kde}\PY{p}{,} \PY{n}{title}\PY{p}{,} \PY{n}{xlab}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Compares the fake data to distribution of 1000 samples generated by the KDE at the}
+         \PY{l+s+sd}{monthly level.}
+         
+         \PY{l+s+sd}{    Input:}
+         \PY{l+s+sd}{        fake\PYZus{}data (num): The fake data metric to be compared to the monthly\PYZhy{}level kde}
+         \PY{l+s+sd}{distribution.}
+         
+         \PY{l+s+sd}{        kde (sklearn.neighbors.kde.KernelDensity): The monthly\PYZhy{}level kde for sampling.}
+         
+         \PY{l+s+sd}{        title (string): The title of the resulting plot.}
+         
+         \PY{l+s+sd}{        xlabl (string): The x\PYZhy{}axis label.}
+         
+         \PY{l+s+sd}{    Output:}
+         \PY{l+s+sd}{        Does not return any output, but displays a plot showing the position of the fake}
+         \PY{l+s+sd}{data}
+         \PY{l+s+sd}{        within the distribution of KDE genenrated samples.}
+         
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{samples} \PY{o}{=} \PY{n}{kde}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}
+             \PY{n}{CI\PYZus{}90} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{samples}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{CI\PYZus{}90}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lower 90}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ CI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{CI\PYZus{}90}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Upper 90}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{ CI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{fake\PYZus{}data}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}fcc546}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fake Data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Placement of Fake }\PY{l+s+si}{\PYZob{}title\PYZcb{}}\PY{l+s+s2}{ (}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(fake\PYZus{}data,2)\PYZcb{}) }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{within Distribution}
+         \PY{n}{of} \PY{n}{KDE} \PY{n}{Samples}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{xlab}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{samples}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{120}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{compare\PYZus{}data}\PY{p}{(}\PY{n}{fake\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{monthly\PYZus{}size\PYZus{}no\PYZus{}outlier\PYZus{}kde}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Monthly}
+         \PY{n}{Size}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{n}{Transaction} \PY{n}{Size}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{compare\PYZus{}data}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{fake\PYZus{}df}\PY{p}{)}\PY{p}{,}\PY{n}{monthly\PYZus{}trans\PYZus{}kde}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Monthly Transactions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of}
+         \PY{n}{Monthly} \PY{n}{Transactions}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_31_0.png}
+    \end{center}
+    
+   \subsection{ Testing Benford's Law}
+
+According to Benford's Law, we expect the numerical data to be
+distributed as follows:\\
+
+The digit 1 should appear 30\% of the time, 2 should appear 17\% of the
+time, etc.\\
+
+Benford's Law is tested on the original data and the fake data.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{benfords\PYZus{}law}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{nums} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{nums\PYZus{}str} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{nums}\PY{p}{]}
+             \PY{n}{data\PYZus{}processed} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+         
+             \PY{n}{ratios} \PY{o}{=} \PY{p}{[}\PY{n}{data\PYZus{}processed}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n}{nums\PYZus{}str}\PY{p}{]}
+         
+             \PY{k}{if} \PY{n}{plot}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Benford}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s Law: Real data vs Fake data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Digit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nums}\PY{p}{,}\PY{n}{ratios}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}label\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{ratios}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,}\PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{real\PYZus{}benford} \PY{o}{=} \PY{n}{benfords\PYZus{}law}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Real data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{fake\PYZus{}benford} \PY{o}{=} \PY{n}{benfords\PYZus{}law}\PY{p}{(}\PY{n}{fake\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amount}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fake data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-assignment-5-fraud_files/cs156-assignment-5-fraud_33_0.png}
+    \end{center}
+    
+   \section{ Summary Analysis}
+
+Overall, I would say that the create\_fake\_month() function generates a
+reasonable set of fake data for a month. An analysis of the original
+transaction data shows that while there appear to be identifiable
+long-term trends, there is enough randomness within the data that as
+long as appropriate KDEs are created, a month's worth of fake data
+generated by sampling KDEs without a time-component should be passable.\\
+
+By running the final check between the daily statistics vs the monthly
+statistics, I can ensure that the fake data that I created largely using
+daily-level KDE samples will not look out of place within the
+monthly-level KDE samples. As previously mentioned, a comparison can
+also be made with the original data before the fake monthly data is
+finalized to really ensure that no data falls without the 90\%
+Confidence Interval range.\\
+
+A Benford's Law test conducted on both the real and fake data shows that
+while the real data largely aligns with Benford's Law, the fake data has
+a more irregular alignment (although it does have 30\% of '1s'). That
+being said, this could be simply because there was less fake data
+generated (30 counts) vs real data (2518 counts). If more fake data was
+generated, we might see a smoother alignment.
+\newpage
+\subsection{Model Flaws}
+
+The main flaw of this model is that it does not consider any
+time-dependency within the data. As mentioned in the sections above,
+there may be clear long-term trends within the data due to the
+individual earning more income, economic patterns, etc. Similarly, there
+may also be short-term trends such as a tendency to spend more on
+paycheck days, and a tendency to spend less towards the end of the
+month. Since the fake data was generated using samples from the KDEs
+that only take data-frequency into account without considering a
+time-component, a forensic consultant could potentially identify the
+fakeness of the data when comparing the timeline trends. As such, I
+still believe that a month's worth of fake data should be able to fly
+under the radar, but long-term data generation could lead to rather
+evident fakeness.\\
+
+Another time component that was not discussed is the exact time of the
+transaction itself. This wasn't considered at all within the model
+(since it wasn't available in the data), but assuming that the forensic
+consultant has access to time records, e.g. hour, minute, second, of the
+transactions, a model that does not generate time data could be
+immediately identified as fake. For example, if we perform all these
+transactions successively at 3am, that may raise alarms when the
+individual normally spaces out their transactions within the daytime.
+\newpage
+\section{Appendix}
+
+All code can be found here:
+
+\url{https://github.com/hueyning/cs156-ml/blob/master/assignment-5-density-models/cs156-assignment-5-fraud.ipynb}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
