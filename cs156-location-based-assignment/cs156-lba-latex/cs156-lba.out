@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.1}{Principal Landmarks}{}% 1
+\BOOKMARK [1][-]{section.2}{ Data Cleaning and Preprocessing}{}% 2
+\BOOKMARK [1][-]{section.3}{Dimensionality Reduction using PCA}{}% 3
+\BOOKMARK [1][-]{section.4}{Results Analysis}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Analyzing Reconstructed Images Along the X-axis \(PC 1\)}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Analyzing Reconstructed Images Along the Y-axis \(PC 2\)}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Analyzing the Four Quadrants}{section.4}% 7
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Top vs Bottom}{subsection.4.3}% 8
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Left vs Right}{subsection.4.3}% 9
+\BOOKMARK [1][-]{appendix.A}{Appendix: Code}{}% 10

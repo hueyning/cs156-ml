@@ -1,0 +1,720 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CS156: Location Based Assignment}
+    \author{Huey Ning Lok}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Principal Landmarks}
+
+The assignment instructions are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  processes all photos down to a size not exceeding 512 pixels in either
+  width or height
+\item
+  using principal components analysis, project your images down to a 2
+  dimensional representation
+\item
+  visually inspect the 2D locations of each photo in the new space
+\item
+  show the reconstruction from each low-dimensional representation
+\item
+  finally pick a point that is far away from any known location and plot
+  its reconstruction
+\end{itemize}
+
+If you perform any other image processing steps, please clearly note
+them in your report. This is meant to be a reasonably light-hearted
+assignment, so feel free to pick irreverent landmarks or use interesting
+image processing techniques to find artistic reconstructions. You may
+also try to conduct this assignment in three dimensions, but no higher!\\
+
+Hand in a single pdf containing all your results and a short discussion
+of your findings. (Make sure to include: at least 10 of your small
+photos and their associated reconstructions; the scatterplot of all
+images in the 2D space, and where your new point is; and the
+reconstruction from your new point.)
+\newpage
+   \section{ Data Cleaning and Preprocessing}
+
+Thirty photos were taken over a timespan of 2pm - 6pm at Kaffa cafe,
+located in Buenos Aires. The photos were taken from inside the cafe, and
+are mostly similar except for small perturbations in the photo angle and
+the objects within the photo (people, cars, etc.). The lighting also
+changes as time passes through the day.\footnote{\textbf{\#responsibility:} Since the CS156 LBA coincided with the final project deadlines, I made sure to visit the LBA destination a few weeks in advance so that I could finish my LBA earlier and devote the rest of my time to the final project(s). By managing my time responsibly, I am able to deliver both the LBA and final project(s) on time, while also ensuring a decent quality for all my work.}\\
+
+The photos originally had heights and widths of 3456 x 4608 pixels, and
+were resized to 390 x 512 pixels. Since the photos have 3 color channels
+(RGB), the shape of a single photo matrix is given as 390 x 512 x 3.
+After flattening the photo arrays, we get 30 photo arrays each with 390
+x 512 x 3 = 599040 columns. This translates to each photo having 599040
+predictor features if being used in a machine learning context.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{imread\PYZus{}collection}
+        \PY{k+kn}{from} \PY{n+nn}{skimage}\PY{n+nn}{.}\PY{n+nn}{transform} \PY{k}{import} \PY{n}{resize}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}my path}
+        \PY{n}{photo\PYZus{}dir} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Photos/*.jpg}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{}creating a collection with the available images}
+        \PY{n}{photo\PYZus{}col} \PY{o}{=} \PY{n}{imread\PYZus{}collection}\PY{p}{(}\PY{n}{photo\PYZus{}dir}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of pictures: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{len(photo\PYZus{}col)\PYZcb{}.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Photo dimensions: }\PY{l+s+si}{\PYZob{}photo\PYZus{}col[0].shape\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Number of pictures: 30.
+Photo dimensions: (3456, 4608, 3)
+
+    \end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}display all the photos}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{)}\PY{p}{,}
+                               \PY{n}{subplot\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,}
+                               \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.02}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                \PY{n}{ax}\PY{p}{[}\PY{n}{row}\PY{p}{,} \PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{photo\PYZus{}col}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_3_0.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}height and width of resized image}
+        \PY{n}{new\PYZus{}height} \PY{o}{=} \PY{l+m+mi}{390}
+        \PY{n}{new\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{512}
+        
+        \PY{c+c1}{\PYZsh{}resize images in dataset}
+        \PY{n}{photos\PYZus{}resized} \PY{o}{=} \PY{p}{[}\PY{n}{resize}\PY{p}{(}\PY{n}{photo\PYZus{}col}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{)}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{constant}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+        \PY{n}{anti\PYZus{}aliasing}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{anti\PYZus{}aliasing\PYZus{}sigma}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{photo\PYZus{}col}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}compare resized image vs original image}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{110}\PY{p}{,}
+                               \PY{n}{subplot\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,}
+                               \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{photo\PYZus{}col}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Original photo (dim=(}\PY{l+s+si}{\PYZob{}photo\PYZus{}col[0].shape\PYZcb{}}\PY{l+s+s2}{))}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{photos\PYZus{}resized}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Resized photo (dim=(}\PY{l+s+si}{\PYZob{}photos\PYZus{}resized[0].shape\PYZcb{}}\PY{l+s+s2}{))}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} Text(0.5,1,'Resized photo (dim=((390, 512, 3)))')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_5_1.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}Reshape images to flattened array}
+        \PY{n}{photos\PYZus{}arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{i}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{photos\PYZus{}resized}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Photos matrix shape:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{photos\PYZus{}arr}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Photos matrix shape: (30, 599040)
+
+    \end{Verbatim}
+
+    \section{Dimensionality Reduction using PCA}
+
+The photos were reduced from 599040 dimensions to 2 dimensions using the
+principal component analysis method (PCA). The 2 dimensions (represented
+by 2 principal components derived from the PCA processing) were then
+plotted as a scatter plot to see if there were any interesting patterns.\\
+
+Various images were reconstructed using random points from the scatter
+plot so that the effect of the two principal components could be
+analyzed individually.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         
+         \PY{c+c1}{\PYZsh{}Use randomized svd\PYZus{}solver to approx first N Principle Components much quicker than}
+         \PY{n}{standard} \PY{n}{PCA}
+         \PY{c+c1}{\PYZsh{}useful for high\PYZhy{}dimensional data}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{randomized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pca\PYZus{}components} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{photos\PYZus{}arr}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ratio of explained variance by the principal components:}
+         \PY{p}{\PYZob{}}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         
+         \PY{n}{pca\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{pca\PYZus{}components}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pca\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\},fontsize=\footnotesize]
+Ratio of explained variance by the principal components: [0.15713406 0.14140331]
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}         PC 1       PC 2
+         0 -22.015896  25.329084
+         1 -28.844690   1.091722
+         2  10.054586  15.360434
+         3  45.936667 -45.935784
+         4  16.530778  23.233039
+\end{Verbatim}
+            
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}temporarily disable logging to hide message of:}
+         \PY{c+c1}{\PYZsh{}\PYZdq{}Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or}
+         \PY{p}{[}\PY{l+m+mf}{0.}\PY{o}{.}\PY{l+m+mi}{255}\PY{p}{]} \PY{k}{for} \PY{n}{integers}\PY{p}{)}\PY{o}{.}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k+kn}{import} \PY{n+nn}{logging}
+         \PY{n}{logger} \PY{o}{=} \PY{n}{logging}\PY{o}{.}\PY{n}{getLogger}\PY{p}{(}\PY{p}{)}
+         \PY{n}{old\PYZus{}level} \PY{o}{=} \PY{n}{logger}\PY{o}{.}\PY{n}{level}
+         \PY{n}{logger}\PY{o}{.}\PY{n}{setLevel}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}reconstruct images with 2 principal components}
+         \PY{n}{pca\PYZus{}projected} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{pca\PYZus{}components}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the results}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,}
+                                \PY{n}{subplot\PYZus{}kw}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yticks}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,}
+                                \PY{n}{gridspec\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{photos\PYZus{}arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{pca\PYZus{}projected}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZhy{}dim}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{images}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2\PYZhy{}dim}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{reconstruction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} Text(0,0.5,'2-dim\textbackslash{}nreconstruction')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_10_1.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{120}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scatter Plot of 2D Locations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PC 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PC 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} Text(0,0.5,'PC 2')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_11_1.png}
+    \end{center}
+    
+    From the scatter plot, it is possible to make out a vaguely parabolic
+shape with the peak around (20, 75). To experiment with some reconstructions, I decided to divide the plot up
+into four quadrants (top left, top right, bottom left, bottom right),
+and plot a few random points from each quadrant to analyze the effects
+of the different principal components. Images were also reconstructed along the x and y-axis to observe the
+effect of linearly increasing either PC 1 or PC 2.
+
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}points to be plotted}
+         \PY{n}{top\PYZus{}left} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                              \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{top\PYZus{}right} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{l+m+mi}{250}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                               \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{bottom\PYZus{}left} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                                  \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                                  \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                                  \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                                  \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{bottom\PYZus{}right} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                                 \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}
+                                 \PY{p}{[}\PY{l+m+mi}{250}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                                 \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{250}\PY{p}{]}\PY{p}{,}
+                                 \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plotting data across x\PYZhy{}axis}
+         \PY{n}{x\PYZus{}points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{300}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                              \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{300}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{400}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plotting data across y\PYZhy{}axis}
+         \PY{n}{y\PYZus{}points} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{400}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}
+                              \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{400}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{120}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Data Points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plot the 4 quadrants}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{top\PYZus{}left}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{top\PYZus{}left}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{coral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Top Left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{top\PYZus{}right}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{top\PYZus{}right}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Top Right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{bottom\PYZus{}left}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{bottom\PYZus{}left}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{forestgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bottom}
+         \PY{n}{Left}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{bottom\PYZus{}right}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{bottom\PYZus{}right}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mediumorchid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bottom}
+         \PY{n}{Right}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}
+         
+         \PY{c+c1}{\PYZsh{}plot x points and y points}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x\PYZus{}points}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}points}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{firebrick}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X \PYZam{} Y points}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y\PYZus{}points}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{y\PYZus{}points}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{firebrick}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}plot x\PYZhy{}axis and y\PYZhy{}axis}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hlines}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{600}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dashed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{vlines}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{600}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dashed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}title, labels, legend}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scatter Plot of 2D Locations and New Points for Reconstruction}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PC 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PC 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <matplotlib.legend.Legend at 0x1c330e1b38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_14_1.png}
+    \end{center}
+    
+    \newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Takes in a numpy array of (x,y) points and reconstructs them according}
+         \PY{l+s+sd}{    to the pca model defined earlier.}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{reconstruction} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{points}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{120}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{reconstruction}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{reconstruction}\PY{p}{)}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}title\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PC Locations: }\PY{l+s+si}{\PYZob{}points[i]\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{reconstruction}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{new\PYZus{}height}\PY{p}{,}\PY{n}{new\PYZus{}width}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}reconstruct images from points of all 4 quadrants}
+         \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{top\PYZus{}left}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Top left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{top\PYZus{}right}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Top right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{bottom\PYZus{}left}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bottom left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{bottom\PYZus{}right}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bottom right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_15_0.png}
+    \end{center}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_15_1.png}
+    \end{center}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_15_2.png}
+    \end{center}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_15_3.png}
+    \end{center}
+    
+    \newpage
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{c+c1}{\PYZsh{}reconstruct images along x and y\PYZhy{}axis}
+          \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{x\PYZus{}points}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Negative X\PYZhy{}axis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{x\PYZus{}points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Positive X\PYZhy{}axis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{y\PYZus{}points}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Negative Y\PYZhy{}axis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{pca\PYZus{}reconstruct}\PY{p}{(}\PY{n}{y\PYZus{}points}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Positive Y\PYZhy{}axis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_16_0.png}
+    \end{center}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_16_1.png}
+    \end{center}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_16_2.png}
+    \end{center}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{cs156-lba_files/cs156-lba_16_3.png}
+    \end{center}
+    
+   \begin{Verbatim}[commandchars=\\\{\},fontsize=\scriptsize]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}reenable logging}
+         \PY{n}{logger}\PY{o}{.}\PY{n}{setLevel}\PY{p}{(}\PY{n}{old\PYZus{}level}\PY{p}{)}
+\end{Verbatim}
+
+\newpage
+    \section{Results Analysis}
+
+The points nearer to the original data points (centered around the
+origin) look more visually similar to the original pictures (as
+expected), and the further away the points are, the more artificial and
+"chaotic" the reconstructed images start to become.
+
+\subsection{Analyzing Reconstructed Images Along the X-axis (PC 1)}
+
+The brightness of the image increases as the value of PC 1 increases.
+That is, images in the negative PC 1 value zone are darker vs images in
+the positive PC 1 value zone. The images also experience a sharp
+increase in contrast as they move further away from the origin.
+
+\subsection{Analyzing Reconstructed Images Along the Y-axis (PC 2)}
+
+The qualitative changes in the images are almost identical to the
+changes identified for varying values of PC 1. Images tend to become
+brighter as the value of PC 2 increases. That is, images in the negative
+PC 2 value zone are darker vs images in the positive PC 2 value zone.
+The images also experience a sharp increase in contrast as they move
+further away from the origin.
+
+\subsection{Analyzing the Four Quadrants}
+
+\subsubsection{Top vs Bottom}
+
+The images reconstructed from the top left and right quadrants are
+significantly brighter than the images from the bottom left and right
+quadrants. This suggests that PC 2 (on the y-axis) has a stronger effect
+on the image brightness vs PC 1. The top images also appear to have
+brighter blue tones vs the bottom images, i.e. the color blue is
+highlighted brightly in the top images, but almost darkened and dulled
+in the bottom images. The lighting on the floor also has an orange tint
+to it vs the lighting in on the floor in the bottom pictures, which have
+a blue tint. This suggests that PC 2 is also influencing the RGB hues of
+the reconstructed images, though the exact manipulation that is occuring
+is unclear.
+
+\subsubsection{Left vs Right}
+
+The images reconstructed from the left quadrant are darker than the
+images in the right quadrant, though the difference in brightness isn't
+as stark as when comparing the reconstructions from the top and bottom
+quadrants. This suggests that PC 1's effect on brightness isn't as
+strong as PC 2's effect on brightness.
+\newpage
+\appendix
+\section{Appendix: Code}
+\url{https://nbviewer.jupyter.org/github/hueyning/cs156-ml/blob/master/cs156-location-based-assignment/cs156-lba.ipynb}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
