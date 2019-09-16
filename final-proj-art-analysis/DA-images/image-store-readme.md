@@ -1,0 +1,1 @@
+Folder for storing downloaded images. Folder name can be changed, but IMAGE_STORE must be changed in scraper settings as well.

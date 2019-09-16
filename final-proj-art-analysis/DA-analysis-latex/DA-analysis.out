@@ -1,0 +1,51 @@
+\BOOKMARK [1][-]{section.1}{Problem Statement}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Deviantart}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Fanart}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Sherlock Holmes}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Solution Specification}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Features}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Predictors}{subsection.2.1}% 7
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Response variable}{subsection.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Models}{section.2}% 9
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Artist Attributes}{subsection.2.2}% 10
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Image Features}{subsection.2.2}% 11
+\BOOKMARK [1][-]{section.3}{Data Collection}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{Number of images downloaded}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Data Importing}{}% 14
+\BOOKMARK [1][-]{section.5}{Data Cleaning and Preprocessing}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Cleaned Columns}{section.5}% 16
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Account Age}{subsection.5.1}% 17
+\BOOKMARK [3][-]{subsubsection.5.1.2}{ Date posted}{subsection.5.1}% 18
+\BOOKMARK [3][-]{subsubsection.5.1.3}{Artist attributes, Image paths and urls}{subsection.5.1}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Ignored columns}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.3}{Final Dataframe}{section.5}% 21
+\BOOKMARK [2][-]{subsection.5.4}{Filling NaNs with Column Means}{section.5}% 22
+\BOOKMARK [1][-]{section.6}{Data Analysis}{}% 23
+\BOOKMARK [2][-]{subsection.6.1}{Descriptive Statistics}{section.6}% 24
+\BOOKMARK [2][-]{subsection.6.2}{Distributions and Correlations}{section.6}% 25
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Predictor Features}{subsection.6.2}% 26
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Correlation Heatmap Analysis}{subsection.6.2}% 27
+\BOOKMARK [3][-]{subsubsection.6.2.3}{Other Features}{subsection.6.2}% 28
+\BOOKMARK [3][-]{subsubsection.6.2.4}{Correlation Heatmap Analysis}{subsection.6.2}% 29
+\BOOKMARK [2][-]{subsection.6.3}{Time-series of Date Posted}{section.6}% 30
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Time-series Analysis}{subsection.6.3}% 31
+\BOOKMARK [1][-]{section.7}{Model-Building}{}% 32
+\BOOKMARK [2][-]{subsection.7.1}{Predicting number of favorites based on social metrics}{section.7}% 33
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Feature selection}{subsection.7.1}% 34
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Linear regression models}{subsection.7.1}% 35
+\BOOKMARK [3][-]{subsubsection.7.1.3}{Neural network}{subsection.7.1}% 36
+\BOOKMARK [3][-]{subsubsection.7.1.4}{Summary}{subsection.7.1}% 37
+\BOOKMARK [3][-]{subsubsection.7.1.5}{Unsupervised Learning - K-Means Clustering}{subsection.7.1}% 38
+\BOOKMARK [2][-]{subsection.7.2}{Predicting number of favorites based on image features}{section.7}% 39
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Training the model}{subsection.7.2}% 40
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Analysis of Training Loss vs Validation Loss}{subsection.7.2}% 41
+\BOOKMARK [3][-]{subsubsection.7.2.3}{Making Predictions on Training and Testing Data}{subsection.7.2}% 42
+\BOOKMARK [3][-]{subsubsection.7.2.4}{Analysis of Predicted vs Observed Values}{subsection.7.2}% 43
+\BOOKMARK [3][-]{subsubsection.7.2.5}{Summary}{subsection.7.2}% 44
+\BOOKMARK [3][-]{subsubsection.7.2.6}{Potential Improvements for CNN Model}{subsection.7.2}% 45
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 46
+\BOOKMARK [2][-]{subsection.8.1}{Potential Improvements and Extensions}{section.8}% 47
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Potential Improvements}{subsection.8.1}% 48
+\BOOKMARK [3][-]{subsubsection.8.1.2}{Potential Extensions}{subsection.8.1}% 49
+\BOOKMARK [1][-]{appendix.A}{Appendix: Scraper Code}{}% 50
+\BOOKMARK [1][-]{appendix.B}{Appendix: Analysis Code}{}% 51
